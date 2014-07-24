@@ -7,8 +7,8 @@
         "commerceguys/guzzle-oauth2-plugin": "~1.0"
     },
     "autoload": {
-        "psr-0": {
-            "CSD\\Marketo": "src"
+        "psr-4": {
+            "CSD\\Marketo\\": "src"
         }
     },
     "authors": [
