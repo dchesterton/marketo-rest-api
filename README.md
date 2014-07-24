@@ -1,4 +1,25 @@
-marketo-rest-api
+Marketo REST API Client
 ================
 
-PHP client for the Marketo.com REST API
+Unofficial PHP client for the Marketo.com REST API: http://developers.marketo.com/documentation/rest/. Requires PHP 5.4+.
+
+Usage
+================
+
+The client is built on Guzzle and uses a factory method to create an instance. e.g.
+
+    use CSD\Marketo\Client;
+    
+    $client = Client::factory(array(
+        'client_id' => 'Marketo client ID',
+        'client_secret' => 'Marketo client secret',
+        'subdomain' => '100-AEK-913'
+    ));
+    
+Client ID and secret are required. You must also specify either a subdomain, e.g. https://XXX.mktorest.com or the full url, e.g. 
+
+    $client = Client::factory(array(
+        'client_id' => 'Marketo client ID',
+        'client_secret' => 'Marketo client secret',
+        'base_url' => 'https://100-AEK-913.mktorest.com'
+    ));
