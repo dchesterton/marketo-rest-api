@@ -1,0 +1,129 @@
+{
+    "name": "marketo",
+    "apiVersion": "1",
+    "description": "Service description used for talking to the Marketo.com REST API.",
+    "operations": {
+        "getLists": {
+            "httpMethod": "GET",
+            "uri": "lists.json",
+            "parameters": {
+                "id": {"location": "query"},
+                "name": {"location": "query"},
+                "programName": {"location": "query"},
+                "workspaceName": {"location": "query"},
+                "batchSize": {"location": "query"},
+                "nextPageToken": {"location": "query"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\GetListsResponse"
+        },
+        "getList": {
+            "httpMethod": "GET",
+            "uri": "lists/{id}.json",
+            "parameters": {
+                "id": {"location": "uri"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\GetListResponse"
+        },
+        "getLeadByFilterType": {
+            "httpMethod": "GET",
+            "uri": "leads.json",
+            "parameters": {
+                "filterType": {"location": "query"},
+                "filterValues": {"location": "query"},
+                "fields": {"location": "query"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\GetLeadResponse"
+        },
+        "getLeadsByFilterType": {
+            "httpMethod": "GET",
+            "uri": "leads.json",
+            "parameters": {
+                "filterType": {"location": "query"},
+                "filterValues": {"location": "query"},
+                "fields": {"location": "query"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\GetLeadsResponse"
+        },
+        "getLeadsByList": {
+            "httpMethod": "GET",
+            "uri": "list/{listId}/leads.json",
+            "parameters": {
+                "listId": {"location": "uri"},
+                "batchSize": {"location": "query"},
+                "nextPageToken": {"location": "query"},
+                "fields": {"location": "query"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\GetLeadsResponse"
+        },
+        "isMemberOfList": {
+            "httpMethod": "GET",
+            "uri": "lists/{listId}/leads/ismember.json",
+            "parameters": {
+                "listId": {"location": "uri"},
+                "id": {"location": "query"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\IsMemberOfListResponse"
+        },
+        "getLead": {
+            "httpMethod": "GET",
+            "uri": "lead/{id}.json",
+            "parameters": {
+                "id": {
+                    "location": "uri"
+                }
+            },
+            "responseClass": "CSD\\Marketo\\Response\\GetLeadResponse"
+        },
+        "getCampaigns": {
+            "httpMethod": "GET",
+            "uri": "campaigns.json",
+            "parameters": {
+                "id": {"location": "query"},
+                "name": {"location": "query"},
+                "programName": {"location": "query"},
+                "workspaceName": {"location": "query"},
+                "batchSize": {"location": "query"},
+                "nextPageToken": {"location": "query"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\GetCampaignsResponse"
+        },
+        "getCampaign": {
+            "httpMethod": "GET",
+            "uri": "campaigns/{id}.json",
+            "parameters": {
+                "id": {
+                    "location": "uri"
+                }
+            },
+            "responseClass": "CSD\\Marketo\\Response\\GetCampaignResponse"
+        },
+        "createOrUpdateLeads": {
+            "httpMethod": "POST",
+            "uri": "leads.json",
+            "parameters": {
+                "action": {"location": "json"},
+                "input": {"location": "json"},
+                "lookupField": {"location": "json"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\CreateOrUpdateLeadsResponse"
+        },
+        "addLeadsToList": {
+            "httpMethod": "POST",
+            "uri": "lists/{listId}/leads.json",
+            "parameters": {
+                "listId": {"location": "uri"},
+                "id": {"location": "query"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\AddOrRemoveLeadsToListResponse"
+        },
+        "removeLeadsFromList": {
+            "httpMethod": "DELETE",
+            "uri": "lists/{listId}/leads.json",
+            "parameters": {
+                "listId": {"location": "uri"},
+                "id": {"location": "query"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\AddOrRemoveLeadsToListResponse"
+        }
+    }
+}
