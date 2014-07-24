@@ -55,7 +55,7 @@ class Client extends GuzzleClient
         $grantType = new Credentials($baseUrl, $config->get('client_id'), $config->get('client_secret'));
         $auth = new Oauth2Plugin($grantType);
 
-        $restUrl = sprintf('%s/rest/v%d', $baseUrl, $config->get('version'));
+        $restUrl = sprintf('%s/rest/v%d', rtrim($baseUrl, '/'), $config->get('version'));
 
         $client = new self($restUrl, $config);
         $client->addSubscriber($auth);
