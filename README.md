@@ -11,25 +11,16 @@ to the 'require' section of your composer.json file and run `composer update`.
 
 Setup
 ----------------
-The client is built on [Guzzle 3](http://guzzle3.readthedocs.org) and uses a factory method to create an instance. e.g.
+The client is built on [Guzzle 3](http://guzzle3.readthedocs.org) and uses a factory method to create an instance.
+You must specify either a Munchkin ID or the full url.
 
 ```php
 use CSD\Marketo\Client;
 
 $client = Client::factory(array(
-    'client_id' => 'Marketo client ID',
-    'client_secret' => 'Marketo client secret',
-    'munchkin_id' => '100-AEK-913'
-));
-```
-
-Client ID and secret are required. You must also specify either a Munchkin Code or the full url, e.g. 
-
-```php
-$client = Client::factory(array(
-    'client_id' => 'Marketo client ID',
-    'client_secret' => 'Marketo client secret',
-    'url' => 'https://100-AEK-913.mktorest.com'
+    'client_id' => 'Marketo client ID',         // required
+    'client_secret' => 'Marketo client secret', // required
+    'munchkin_id' => '100-AEK-913' // alternatively, you can supply the full URL, e.g. 'url' => 'https://100-AEK-913.mktorest.com'
 ));
 ```
 
