@@ -1,9 +1,18 @@
 Marketo REST API Client
 ================
 Unofficial PHP client for the Marketo.com REST API: http://developers.marketo.com/documentation/rest/. Requires PHP 5.4+
-Usage
-================
 
+Installation
+----------------
+The recommended way of installing the client is via [Composer](http://getcomposer.org/). Simply add the following line
+to your composer.json file and run `composer update`.
+
+```json
+"dchesterton/marketo-rest-api": "dev-master"
+```
+
+Setup
+----------------
 The client is built on [Guzzle 3](http://guzzle3.readthedocs.org) and uses a factory method to create an instance. e.g.
 
 ```php
@@ -25,9 +34,11 @@ $client = Client::factory(array(
     'url' => 'https://100-AEK-913.mktorest.com'
 ));
 ```
-    
-You can then use your client object to communicate with Marketo.com. View the source of src/Client.php for all the available methods.
+
+Usage
+----------------
+View the source of `src/Client.php` for all the available methods.
 
 License
-================
+----------------
 This source is licensed under an MIT License, see the LICENSE file for full details. If you use this code, it would be great to hear from you.
