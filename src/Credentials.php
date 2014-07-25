@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of the Marketo REST API Client package.
+ *
+ * (c) 2014 Daniel Chesterton
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace CSD\Marketo;
 
 use CommerceGuys\Guzzle\Plugin\Oauth2\GrantType\GrantTypeInterface;
@@ -8,6 +17,7 @@ use Guzzle\Http\Client;
  * Requests credentials from Marketo's identity service using the Client ID and Client Secret.
  *
  * @author Daniel Chesterton <daniel@chestertondevelopment.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
 class Credentials implements GrantTypeInterface
 {

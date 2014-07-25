@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of the Marketo REST API Client package.
+ *
+ * (c) 2014 Daniel Chesterton
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace CSD\Marketo;
 
 // Guzzle
@@ -19,9 +28,10 @@ use CSD\Marketo\Response\GetListsResponse;
 use CSD\Marketo\Response\IsMemberOfListResponse;
 
 /**
- * Guzzle client for communicating with the Marketo REST API.
+ * Guzzle client for communicating with the Marketo.com REST API.
  *
- * @see http://developers.marketo.com/documentation/rest/
+ * @link http://developers.marketo.com/documentation/rest/
+ *
  * @author Daniel Chesterton <daniel@chestertondevelopment.com>
  */
 class Client extends GuzzleClient
@@ -200,18 +210,22 @@ class Client extends GuzzleClient
     /**
      * Get multiple leads by filter type.
      *
-     * @param string $filterType
-     * @param string $filterValues
-     * @param array  $args
+     * @param string $filterType   One of the supported filter types, e.g. id, cookie or email. See Marketo's documentation for all types.
+     * @param string $filterValues Comma separated list of filter values
+     * @param array  $fields       Array of field names to be returned in the response
      *
      * @link http://developers.marketo.com/documentation/rest/get-multiple-leads-by-filter-type/
      *
      * @return GetLeadsResponse
      */
-    public function getLeadsByFilterType($filterType, $filterValues, $args = [])
+    public function getLeadsByFilterType($filterType, $filterValues, $fields = [])
     {
         $args['filterType'] = $filterType;
         $args['filterValues'] = $filterValues;
+
+        if (count($fields)) {
+            $args['fields'] = implode(',', $fields);
+        }
 
         return $this->getResult('getLeadsByFilterType', $args);
     }
@@ -222,18 +236,22 @@ class Client extends GuzzleClient
      * Convenient method which uses {@link http://developers.marketo.com/documentation/rest/get-multiple-leads-by-filter-type/}
      * internally and just returns the first lead if there is one.
      *
-     * @param string $type
-     * @param string $value
-     * @param array  $args
+     * @param string $filterType  One of the supported filter types, e.g. id, cookie or email. See Marketo's documentation for all types.
+     * @param string $filterValue The value to filter by
+     * @param array $fields       Array of field names to be returned in the response
      *
      * @link http://developers.marketo.com/documentation/rest/get-multiple-leads-by-filter-type/
      *
      * @return GetLeadResponse
      */
-    public function getLeadByFilterType($type, $value, $args = [])
+    public function getLeadByFilterType($filterType, $filterValue, $fields = [])
     {
-        $args['filterType'] = $type;
-        $args['filterValues'] = $value;
+        $args['filterType'] = $filterType;
+        $args['filterValues'] = $filterType;
+
+        if (count($fields)) {
+            $args['fields'] = implode(',', $fields);
+        }
 
         return $this->getResult('getLeadByFilterType', $args);
     }
