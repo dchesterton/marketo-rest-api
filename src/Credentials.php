@@ -22,9 +22,9 @@ use Guzzle\Http\Client;
 class Credentials implements GrantTypeInterface
 {
     /**
-     * @var Client
+     * @var string
      */
-    private $client;
+    private $url;
 
     /**
      * @var string
@@ -43,7 +43,7 @@ class Credentials implements GrantTypeInterface
      */
     public function __construct($url, $clientId, $clientSecret)
     {
-        $this->client = new Client($url);
+        $this->url = $url;
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
     }
@@ -53,13 +53,15 @@ class Credentials implements GrantTypeInterface
      */
     public function getTokenData()
     {
+        $client = new Client($this->url);
+
         $params = [
             'grant_type' => 'client_credentials',
             'client_id' => $this->clientId,
             'client_secret' => $this->clientSecret
         ];
 
-        $request = $this->client->get('/identity/oauth/token', null, ['query' => $params]);
+        $request = $client->get('/identity/oauth/token', null, ['query' => $params]);
         $data = $request->send()->json();
 
         return [
