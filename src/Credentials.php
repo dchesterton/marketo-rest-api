@@ -64,6 +64,10 @@ class Credentials implements GrantTypeInterface
         $request = $client->get('/identity/oauth/token', null, ['query' => $params]);
         $data = $request->send()->json();
 
+        if (!isset($data['access_token']) || !isset($data['expires_in'])) {
+            throw new \Exception('Invalid Marketo credentials response.');
+        }
+
         return [
             'access_token' => $data['access_token'],
             'expires_in' => $data['expires_in']
