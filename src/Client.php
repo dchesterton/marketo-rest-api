@@ -65,79 +65,83 @@ class Client extends GuzzleClient
     }
 
     /**
+     * Calls the CreateOrUpdateLeads command with the given action.
+     *
+     * @see Client::createLeads()
+     * @see Client::createOrUpdateLeads()
+     * @see Client::updateLeads()
+     * @see Client::createDuplicateLeads()
+     */
+    private function createOrUpdateLeadsCommand($action, $leads, $lookupField, $args)
+    {
+        $args['input'] = $leads;
+        $args['action'] = $action;
+
+        if (isset($lookupField)) {
+            $args['lookupField'] = $lookupField;
+        }
+
+        return $this->getResult('createOrUpdateLeads', $args);
+    }
+
+    /**
+     * CreateOrUpdateLeads command with 'createOnly' action.
+     *
      * @param array  $leads
      * @param string $lookupField
      * @param array  $args
+     * @see Client::createOrUpdateLeadsCommand()
      *
      * @return CreateOrUpdateLeadsResponse
      */
     public function createLeads($leads, $lookupField = null, $args = [])
     {
-        $args['input'] = $leads;
-        $args['action'] = 'createOnly';
-
-        if (isset($lookupField)) {
-            $args['lookupField'] = $lookupField;
-        }
-
-        return $this->getResult('createOrUpdateLeads', $args);
+        return $this->createOrUpdateLeadsCommand('createOnly', $leads, $lookupField, $args);
     }
 
     /**
+     * CreateOrUpdateLeads command with 'createOrUpdate' action.
+    *
      * @param array  $leads
      * @param string $lookupField
      * @param array  $args
+     * @see Client::createOrUpdateLeadsCommand()
      *
      * @return CreateOrUpdateLeadsResponse
      */
     public function createOrUpdateLeads($leads, $lookupField = null, $args = [])
     {
-        $args['input'] = $leads;
-        $args['action'] = 'createOrUpdate';
-
-        if (isset($lookupField)) {
-            $args['lookupField'] = $lookupField;
-        }
-
-        return $this->getResult('createOrUpdateLeads', $args);
+        return $this->createOrUpdateLeadsCommand('createOrUpdate', $leads, $lookupField, $args);
     }
 
     /**
+     * CreateOrUpdateLeads command with 'updateOnly' action.
+     *
      * @param array  $leads
      * @param string $lookupField
      * @param array  $args
+     * @see Client::createOrUpdateLeadsCommand()
      *
      * @return CreateOrUpdateLeadsResponse
      */
     public function updateLeads($leads, $lookupField = null, $args = [])
     {
-        $args['input'] = $leads;
-        $args['action'] = 'updateOnly';
-
-        if (isset($lookupField)) {
-            $args['lookupField'] = $lookupField;
-        }
-
-        return $this->getResult('createOrUpdateLeads', $args);
+        return $this->createOrUpdateLeadsCommand('updateOnly', $leads, $lookupField, $args);
     }
 
     /**
+     * CreateOrUpdateLeads command with 'createDuplicate' action.
+     *
      * @param array  $leads
      * @param string $lookupField
      * @param array  $args
+     * @see Client::createOrUpdateLeadsCommand()
      *
      * @return CreateOrUpdateLeadsResponse
      */
     public function createDuplicateLeads($leads, $lookupField = null, $args = [])
     {
-        $args['input'] = $leads;
-        $args['action'] = 'createDuplicate';
-
-        if (isset($lookupField)) {
-            $args['lookupField'] = $lookupField;
-        }
-
-        return $this->getResult('createOrUpdateLeads', $args);
+        return $this->createOrUpdateLeadsCommand('createDuplicate', $leads, $lookupField, $args);
     }
 
     /**
