@@ -5,11 +5,9 @@ Unofficial PHP client for the Marketo.com REST API: http://developers.marketo.co
 Installation
 ----------------
 The recommended way of installing the client is via [Composer](http://getcomposer.org/). Simply add the following line
-to your composer.json file and run `composer update`.
+to the 'require' section of your composer.json file and run `composer update`.
 
-```json
-"dchesterton/marketo-rest-api": "dev-master"
-```
+    "dchesterton/marketo-rest-api": "dev-master"
 
 Setup
 ----------------
