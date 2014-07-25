@@ -67,10 +67,19 @@ class Client extends GuzzleClient
     /**
      * Calls the CreateOrUpdateLeads command with the given action.
      *
+     * @param string $action
+     * @param array  $leads
+     * @param string $lookupField
+     * @param array  $args
+     *
      * @see Client::createLeads()
      * @see Client::createOrUpdateLeads()
      * @see Client::updateLeads()
      * @see Client::createDuplicateLeads()
+     *
+     * @link http://developers.marketo.com/documentation/rest/createupdate-leads/
+     *
+     * @return CreateOrUpdateLeadsResponse
      */
     private function createOrUpdateLeadsCommand($action, $leads, $lookupField, $args)
     {
@@ -85,12 +94,14 @@ class Client extends GuzzleClient
     }
 
     /**
-     * CreateOrUpdateLeads command with 'createOnly' action.
+     * Create the given leads.
      *
      * @param array  $leads
      * @param string $lookupField
      * @param array  $args
      * @see Client::createOrUpdateLeadsCommand()
+     *
+     * @link http://developers.marketo.com/documentation/rest/createupdate-leads/
      *
      * @return CreateOrUpdateLeadsResponse
      */
@@ -100,12 +111,14 @@ class Client extends GuzzleClient
     }
 
     /**
-     * CreateOrUpdateLeads command with 'createOrUpdate' action.
-    *
+     * Update the given leads, or create them if they do not exist.
+     *
      * @param array  $leads
      * @param string $lookupField
      * @param array  $args
      * @see Client::createOrUpdateLeadsCommand()
+     *
+     * @link http://developers.marketo.com/documentation/rest/createupdate-leads/
      *
      * @return CreateOrUpdateLeadsResponse
      */
@@ -115,12 +128,14 @@ class Client extends GuzzleClient
     }
 
     /**
-     * CreateOrUpdateLeads command with 'updateOnly' action.
+     * Update the given leads.
      *
      * @param array  $leads
      * @param string $lookupField
      * @param array  $args
      * @see Client::createOrUpdateLeadsCommand()
+     *
+     * @link http://developers.marketo.com/documentation/rest/createupdate-leads/
      *
      * @return CreateOrUpdateLeadsResponse
      */
@@ -130,12 +145,14 @@ class Client extends GuzzleClient
     }
 
     /**
-     * CreateOrUpdateLeads command with 'createDuplicate' action.
+     * Create duplicates of the given leads.
      *
      * @param array  $leads
      * @param string $lookupField
      * @param array  $args
      * @see Client::createOrUpdateLeadsCommand()
+     *
+     * @link http://developers.marketo.com/documentation/rest/createupdate-leads/
      *
      * @return CreateOrUpdateLeadsResponse
      */
@@ -145,8 +162,13 @@ class Client extends GuzzleClient
     }
 
     /**
-     * @param int|array $ids
+     * Get multiple lists.
+     *
+     * @param int|array $ids  Filter by one or more IDs
      * @param array     $args
+     *
+     * @link http://developers.marketo.com/documentation/rest/get-multiple-lists/
+     *
      * @return GetListsResponse
      */
     public function getLists($ids = null, $args = [])
@@ -159,8 +181,13 @@ class Client extends GuzzleClient
     }
 
     /**
+     * Get a list by ID.
+     *
      * @param int   $id
      * @param array $args
+     *
+     * @link http://developers.marketo.com/documentation/rest/get-list-by-id/
+     *
      * @return GetListResponse
      */
     public function getList($id, $args = [])
@@ -171,9 +198,13 @@ class Client extends GuzzleClient
     }
 
     /**
+     * Get multiple leads by filter type.
+     *
      * @param string $filterType
      * @param string $filterValues
      * @param array  $args
+     *
+     * @link http://developers.marketo.com/documentation/rest/get-multiple-leads-by-filter-type/
      *
      * @return GetLeadsResponse
      */
@@ -186,9 +217,17 @@ class Client extends GuzzleClient
     }
 
     /**
+     * Get a lead by filter type.
+     *
+     * Convenient method which uses {@link http://developers.marketo.com/documentation/rest/get-multiple-leads-by-filter-type/}
+     * internally and just returns the first lead if there is one.
+     *
      * @param string $type
      * @param string $value
      * @param array  $args
+     *
+     * @link http://developers.marketo.com/documentation/rest/get-multiple-leads-by-filter-type/
+     *
      * @return GetLeadResponse
      */
     public function getLeadByFilterType($type, $value, $args = [])
@@ -200,8 +239,12 @@ class Client extends GuzzleClient
     }
 
     /**
+     * Get multiple leads by list ID.
+     *
      * @param int   $listId
      * @param array $args
+     *
+     * @link http://developers.marketo.com/documentation/rest/get-multiple-leads-by-list-id/
      *
      * @return GetLeadsResponse
      */
@@ -213,8 +256,12 @@ class Client extends GuzzleClient
     }
 
     /**
+     * Get a lead by ID.
+     *
      * @param int   $id
      * @param array $args
+     *
+     * @link http://developers.marketo.com/documentation/rest/get-lead-by-id/
      *
      * @return GetLeadResponse
      */
@@ -225,9 +272,13 @@ class Client extends GuzzleClient
     }
 
     /**
-     * @param int       $listId
-     * @param int|array $id
+     * Check if a lead is a member of a list.
+     *
+     * @param int       $listId List ID
+     * @param int|array $id     Lead ID
      * @param array     $args
+     *
+     * @link http://developers.marketo.com/documentation/rest/member-of-list/
      *
      * @return IsMemberOfListResponse
      */
@@ -240,8 +291,12 @@ class Client extends GuzzleClient
     }
 
     /**
+     * Get a campaign by ID.
+     *
      * @param int   $id
      * @param array $args
+     *
+     * @link http://developers.marketo.com/documentation/rest/get-campaign-by-id/
      *
      * @return GetCampaignResponse
      */
@@ -253,8 +308,12 @@ class Client extends GuzzleClient
     }
 
     /**
+     * Get campaigns.
+     *
      * @param int|array $ids
      * @param array     $args
+     *
+     * @link http://developers.marketo.com/documentation/rest/get-multiple-campaigns/
      *
      * @return GetCampaignsResponse
      */
@@ -268,9 +327,13 @@ class Client extends GuzzleClient
     }
 
     /**
-     * @param int       $listId
-     * @param int|array $leads
+     * Add one or more leads to the specified list.
+     *
+     * @param int       $listId List ID
+     * @param int|array $leads  Either a single lead ID or an array of lead IDs
      * @param array     $args
+     *
+     * @link http://developers.marketo.com/documentation/rest/add-leads-to-list/
      *
      * @return AddOrRemoveLeadsToListResponse
      */
@@ -283,9 +346,13 @@ class Client extends GuzzleClient
     }
 
     /**
-     * @param int       $listId
-     * @param int|array $leads
+     * Remove one or more leads from the specified list.
+     *
+     * @param int       $listId List ID
+     * @param int|array $leads  Either a single lead ID or an array of lead IDs
      * @param array     $args
+     *
+     * @link http://developers.marketo.com/documentation/rest/remove-leads-from-list/
      *
      * @return AddOrRemoveLeadsToListResponse
      */
@@ -298,6 +365,8 @@ class Client extends GuzzleClient
     }
 
     /**
+     * Internal helper method to actually perform command.
+     *
      * @param string $command
      * @param array  $args
      * @param bool   $fixArgs
