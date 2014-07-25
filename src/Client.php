@@ -293,7 +293,7 @@ class Client extends GuzzleClient
      * Check if a lead is a member of a list.
      *
      * @param int       $listId List ID
-     * @param int|array $id     Lead ID
+     * @param int|array $id     Lead ID or an array of Lead IDs
      * @param array     $args
      *
      * @link http://developers.marketo.com/documentation/rest/member-of-list/
@@ -328,7 +328,7 @@ class Client extends GuzzleClient
     /**
      * Get campaigns.
      *
-     * @param int|array $ids
+     * @param int|array $ids  A single Campaign ID or an array of Campaign IDs
      * @param array     $args
      *
      * @link http://developers.marketo.com/documentation/rest/get-multiple-campaigns/
