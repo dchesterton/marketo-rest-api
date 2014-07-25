@@ -32,30 +32,30 @@ class Client extends GuzzleClient
     public static function factory($config = array())
     {
         $default = [
-            'base_url' => false,
-            'subdomain' => false,
+            'url' => false,
+            'munchkin_id' => false,
             'version' => 1
         ];
 
         $required = ['client_id', 'client_secret', 'version'];
         $config = Collection::fromConfig($config, $default, $required);
 
-        $baseUrl = $config->get('base_url');
+        $url = $config->get('url');
 
-        if (!$baseUrl) {
-            $subdomain = $config->get('subdomain');
+        if (!$url) {
+            $munchkin = $config->get('munchkin_id');
 
-            if (!$subdomain) {
-                throw new \Exception('Must provide either base URL or Marketo subdomain.');
+            if (!$munchkin) {
+                throw new \Exception('Must provide either a URL or Munchkin code.');
             }
 
-            $baseUrl = sprintf('https://%s.mktorest.com', $subdomain);
+            $url = sprintf('https://%s.mktorest.com', $munchkin);
         }
 
-        $grantType = new Credentials($baseUrl, $config->get('client_id'), $config->get('client_secret'));
+        $grantType = new Credentials($url, $config->get('client_id'), $config->get('client_secret'));
         $auth = new Oauth2Plugin($grantType);
 
-        $restUrl = sprintf('%s/rest/v%d', rtrim($baseUrl, '/'), $config->get('version'));
+        $restUrl = sprintf('%s/rest/v%d', rtrim($url, '/'), $config->get('version'));
 
         $client = new self($restUrl, $config);
         $client->addSubscriber($auth);

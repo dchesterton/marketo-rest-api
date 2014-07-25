@@ -12,17 +12,17 @@ use CSD\Marketo\Client;
 $client = Client::factory(array(
     'client_id' => 'Marketo client ID',
     'client_secret' => 'Marketo client secret',
-    'subdomain' => '100-AEK-913'
+    'munchkin_id' => '100-AEK-913'
 ));
 ```
 
-Client ID and secret are required. You must also specify either a subdomain, e.g. https://XXX.mktorest.com or the full url, e.g. 
+Client ID and secret are required. You must also specify either a Munchkin Code or the full url, e.g. 
 
 ```php
 $client = Client::factory(array(
     'client_id' => 'Marketo client ID',
     'client_secret' => 'Marketo client secret',
-    'base_url' => 'https://100-AEK-913.mktorest.com'
+    'url' => 'https://100-AEK-913.mktorest.com'
 ));
 ```
     
