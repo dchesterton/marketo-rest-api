@@ -11,7 +11,7 @@
 namespace CSD\Marketo;
 
 use CommerceGuys\Guzzle\Plugin\Oauth2\GrantType\GrantTypeInterface;
-use Guzzle\Http\Client;
+use Guzzle\Http\Client as GuzzleClient;
 
 /**
  * Requests credentials from Marketo's identity service using the Client ID and Client Secret.
@@ -53,7 +53,7 @@ class Credentials implements GrantTypeInterface
      */
     public function getTokenData()
     {
-        $client = new Client($this->url);
+        $client = new GuzzleClient($this->url);
 
         $params = [
             'grant_type' => 'client_credentials',
