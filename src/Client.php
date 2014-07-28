@@ -238,7 +238,7 @@ class Client extends GuzzleClient
      *
      * @param string $filterType  One of the supported filter types, e.g. id, cookie or email. See Marketo's documentation for all types.
      * @param string $filterValue The value to filter by
-     * @param array $fields       Array of field names to be returned in the response
+     * @param array  $fields      Array of field names to be returned in the response
      *
      * @link http://developers.marketo.com/documentation/rest/get-multiple-leads-by-filter-type/
      *
@@ -247,7 +247,7 @@ class Client extends GuzzleClient
     public function getLeadByFilterType($filterType, $filterValue, $fields = [])
     {
         $args['filterType'] = $filterType;
-        $args['filterValues'] = $filterType;
+        $args['filterValues'] = $filterValue;
 
         if (count($fields)) {
             $args['fields'] = implode(',', $fields);
