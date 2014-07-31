@@ -3,7 +3,7 @@
     "description": "A PHP client for the Marketo.com REST API",
     "license": "MIT",
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=5.3.3",
         "guzzle/guzzle": "~3.8",
         "commerceguys/guzzle-oauth2-plugin": "~1.0"
     },
