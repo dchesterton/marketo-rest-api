@@ -63,9 +63,9 @@ class GetLeadResponse extends Response
         }
 
         // if it's not successful and there's no error from Marketo, create one
-        return [
+        return array(
             'code' => '',
             'message' => 'Lead not found'
-        ];
+        );
     }
 }

@@ -41,13 +41,13 @@ class Client extends GuzzleClient
      */
     public static function factory($config = array())
     {
-        $default = [
+        $default = array(
             'url' => false,
             'munchkin_id' => false,
             'version' => 1
-        ];
+        );
 
-        $required = ['client_id', 'client_secret', 'version'];
+        $required = array('client_id', 'client_secret', 'version');
         $config = Collection::fromConfig($config, $default, $required);
 
         $url = $config->get('url');
@@ -115,7 +115,7 @@ class Client extends GuzzleClient
      *
      * @return CreateOrUpdateLeadsResponse
      */
-    public function createLeads($leads, $lookupField = null, $args = [])
+    public function createLeads($leads, $lookupField = null, $args = array())
     {
         return $this->createOrUpdateLeadsCommand('createOnly', $leads, $lookupField, $args);
     }
@@ -132,7 +132,7 @@ class Client extends GuzzleClient
      *
      * @return CreateOrUpdateLeadsResponse
      */
-    public function createOrUpdateLeads($leads, $lookupField = null, $args = [])
+    public function createOrUpdateLeads($leads, $lookupField = null, $args = array())
     {
         return $this->createOrUpdateLeadsCommand('createOrUpdate', $leads, $lookupField, $args);
     }
@@ -149,7 +149,7 @@ class Client extends GuzzleClient
      *
      * @return CreateOrUpdateLeadsResponse
      */
-    public function updateLeads($leads, $lookupField = null, $args = [])
+    public function updateLeads($leads, $lookupField = null, $args = array())
     {
         return $this->createOrUpdateLeadsCommand('updateOnly', $leads, $lookupField, $args);
     }
@@ -166,7 +166,7 @@ class Client extends GuzzleClient
      *
      * @return CreateOrUpdateLeadsResponse
      */
-    public function createDuplicateLeads($leads, $lookupField = null, $args = [])
+    public function createDuplicateLeads($leads, $lookupField = null, $args = array())
     {
         return $this->createOrUpdateLeadsCommand('createDuplicate', $leads, $lookupField, $args);
     }
@@ -181,7 +181,7 @@ class Client extends GuzzleClient
      *
      * @return GetListsResponse
      */
-    public function getLists($ids = null, $args = [])
+    public function getLists($ids = null, $args = array())
     {
         if ($ids) {
             $args['id'] = $ids;
@@ -200,7 +200,7 @@ class Client extends GuzzleClient
      *
      * @return GetListResponse
      */
-    public function getList($id, $args = [])
+    public function getList($id, $args = array())
     {
         $args['id'] = $id;
 
@@ -218,7 +218,7 @@ class Client extends GuzzleClient
      *
      * @return GetLeadsResponse
      */
-    public function getLeadsByFilterType($filterType, $filterValues, $fields = [])
+    public function getLeadsByFilterType($filterType, $filterValues, $fields = array())
     {
         $args['filterType'] = $filterType;
         $args['filterValues'] = $filterValues;
@@ -244,7 +244,7 @@ class Client extends GuzzleClient
      *
      * @return GetLeadResponse
      */
-    public function getLeadByFilterType($filterType, $filterValue, $fields = [])
+    public function getLeadByFilterType($filterType, $filterValue, $fields = array())
     {
         $args['filterType'] = $filterType;
         $args['filterValues'] = $filterValue;
@@ -266,7 +266,7 @@ class Client extends GuzzleClient
      *
      * @return GetLeadsResponse
      */
-    public function getLeadsByList($listId, $args = [])
+    public function getLeadsByList($listId, $args = array())
     {
         $args['listId'] = $listId;
 
@@ -283,7 +283,7 @@ class Client extends GuzzleClient
      *
      * @return GetLeadResponse
      */
-    public function getLead($id, $args = [])
+    public function getLead($id, $args = array())
     {
         $args['id'] = $id;
         return $this->getResult('getLead', $args);
@@ -300,7 +300,7 @@ class Client extends GuzzleClient
      *
      * @return IsMemberOfListResponse
      */
-    public function isMemberOfList($listId, $id, $args = [])
+    public function isMemberOfList($listId, $id, $args = array())
     {
         $args['listId'] = $listId;
         $args['id'] = $id;
@@ -318,7 +318,7 @@ class Client extends GuzzleClient
      *
      * @return GetCampaignResponse
      */
-    public function getCampaign($id, $args = [])
+    public function getCampaign($id, $args = array())
     {
         $args['id'] = $id;
 
@@ -335,7 +335,7 @@ class Client extends GuzzleClient
      *
      * @return GetCampaignsResponse
      */
-    public function getCampaigns($ids = null, $args = [])
+    public function getCampaigns($ids = null, $args = array())
     {
         if ($ids) {
             $args['id'] = $ids;
@@ -355,7 +355,7 @@ class Client extends GuzzleClient
      *
      * @return AddOrRemoveLeadsToListResponse
      */
-    public function addLeadsToList($listId, $leads, $args = [])
+    public function addLeadsToList($listId, $leads, $args = array())
     {
         $args['listId'] = $listId;
         $args['id'] = (array) $leads;
@@ -374,7 +374,7 @@ class Client extends GuzzleClient
      *
      * @return AddOrRemoveLeadsToListResponse
      */
-    public function removeLeadsFromList($listId, $leads, $args = [])
+    public function removeLeadsFromList($listId, $leads, $args = array())
     {
         $args['listId'] = $listId;
         $args['id'] = (array) $leads;

@@ -55,22 +55,22 @@ class Credentials implements GrantTypeInterface
     {
         $client = new GuzzleClient($this->url);
 
-        $params = [
+        $params = array(
             'grant_type' => 'client_credentials',
             'client_id' => $this->clientId,
             'client_secret' => $this->clientSecret
-        ];
+        );
 
-        $request = $client->get('/identity/oauth/token', null, ['query' => $params]);
+        $request = $client->get('/identity/oauth/token', null, array('query' => $params));
         $data = $request->send()->json();
 
         if (!isset($data['access_token']) || !isset($data['expires_in'])) {
             throw new \Exception('Invalid Marketo credentials response.');
         }
 
-        return [
+        return array(
             'access_token' => $data['access_token'],
             'expires_in' => $data['expires_in']
-        ];
+        );
     }
 }
