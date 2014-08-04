@@ -24,7 +24,11 @@ class GetCampaignResponse extends Response
      */
     public function getCampaign()
     {
-        return $this->isSuccess()? $this->getResult()[0]: null;
+        if ($this->isSuccess()) {
+            $result = $this->getResult();
+            return $result[0];
+        }
+        return null;
     }
 
     /**
@@ -32,7 +36,11 @@ class GetCampaignResponse extends Response
      */
     public function getId()
     {
-        return $this->isSuccess()? $this->getCampaign()['id']: null;
+        if ($this->isSuccess()) {
+            $campaign = $this->getCampaign();
+            return $campaign['id'];
+        }
+        return null;
     }
 
     /**
@@ -40,7 +48,11 @@ class GetCampaignResponse extends Response
      */
     public function getName()
     {
-        return $this->isSuccess()? $this->getCampaign()['name']: null;
+        if ($this->isSuccess()) {
+            $campaign = $this->getCampaign();
+            return $campaign['name'];
+        }
+        return null;
     }
 
     /**
@@ -48,7 +60,11 @@ class GetCampaignResponse extends Response
      */
     public function getDescription()
     {
-        return $this->isSuccess()? $this->getCampaign()['description']: null;
+        if ($this->isSuccess()) {
+            $campaign = $this->getCampaign();
+            return $campaign['description'];
+        }
+        return null;
     }
 
     /**
@@ -56,7 +72,11 @@ class GetCampaignResponse extends Response
      */
     public function getProgramName()
     {
-        return $this->isSuccess()? $this->getCampaign()['programName']: null;
+        if ($this->isSuccess()) {
+            $campaign = $this->getCampaign();
+            return $campaign['programName'];
+        }
+        return null;
     }
 
     /**
@@ -64,7 +84,11 @@ class GetCampaignResponse extends Response
      */
     public function getCreatedAt()
     {
-        return $this->isSuccess()? $this->getCampaign()['createdAt']: null;
+        if ($this->isSuccess()) {
+            $campaign = $this->getCampaign();
+            return $campaign['createdAt'];
+        }
+        return null;
     }
 
     /**
@@ -72,6 +96,10 @@ class GetCampaignResponse extends Response
      */
     public function getUpdatedAt()
     {
-        return $this->isSuccess()? $this->getCampaign()['updatedAt']: null;
+        if ($this->isSuccess()) {
+            $campaign = $this->getCampaign();
+            return $campaign['updatedAt'];
+        }
+        return null;
     }
 }

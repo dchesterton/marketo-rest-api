@@ -24,6 +24,10 @@ class GetListResponse extends Response
      */
     public function getList()
     {
-        return $this->isSuccess()? $this->getResult()[0]: null;
+        if ($this->isSuccess()) {
+        	$result = $this->getResult();
+        	return $result[0];
+        }
+        return null;
     }
 }

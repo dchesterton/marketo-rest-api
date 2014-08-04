@@ -29,7 +29,8 @@ class CreateOrUpdateLeadsResponse extends Response
     {
         if ($this->isSuccess()) {
             if (!$id) {
-                return $this->getResult()[0]['status'];
+                $result = $this->getResult();
+                return $result[0]['status'];
             }
 
             foreach ($this->getResult() as $row) {
@@ -48,7 +49,8 @@ class CreateOrUpdateLeadsResponse extends Response
     public function getId()
     {
         if ($this->isSuccess()) {
-            return $this->getResult()[0]['id'];
+            $result = $this->getResult();
+            return $result[0]['id'];
         }
         return false;
     }

@@ -24,7 +24,11 @@ class GetLeadResponse extends Response
      */
     public function getLead()
     {
-        return $this->isSuccess()? $this->getResult()[0]: null;
+        if ($this->isSuccess()) {
+            $result = $this->getResult();
+            return $result[0];
+        }
+        return null;
     }
 
     /**
@@ -32,7 +36,11 @@ class GetLeadResponse extends Response
      */
     public function getId()
     {
-        return $this->isSuccess()? $this->getLead()['id']: null;
+        if ($this->isSuccess()) {
+            $lead = $this->getLead();
+            return $lead['id'];
+        }
+        return null;
     }
 
     /**
