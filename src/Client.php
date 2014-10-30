@@ -382,6 +382,21 @@ class Client extends GuzzleClient
         return $this->getResult('removeLeadsToList', $args, true);
     }
 
+    public function requestCampaign($id, $leads, $tokens = array(), $args = array())
+    {
+        $args['id'] = $id;
+
+        $args['input'] = array('leads' => array_map(function ($id) {
+            return array('id' => $id);
+        }, (array) $leads));
+
+        if (!empty($tokens)) {
+            $args['input']['tokens'] = $tokens;
+        }
+
+        return $this->getResult('requestCampaign', $args);
+    }
+
     /**
      * Internal helper method to actually perform command.
      *
