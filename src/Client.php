@@ -398,6 +398,33 @@ class Client extends GuzzleClient
     }
 
     /**
+     * Trigger a campaign for one or more leads.
+     *
+     * @param int       $id     Campaign ID
+     * @param int|array $leads  Either a single lead ID or an array of lead IDs
+     * @param array     $tokens Key value array of tokens to send new values for.
+     * @param array     $args
+     *
+     * @link http://developers.marketo.com/documentation/rest/request-campaign/
+     *
+     * @return RequestCampaignResponse
+     */
+    public function requestCampaign($id, $leads, $tokens = array(), $args = array())
+    {
+        $args['id'] = $id;
+
+        $args['input'] = array('leads' => array_map(function ($id) {
+            return array('id' => $id);
+        }, (array) $leads));
+
+        if (!empty($tokens)) {
+            $args['input']['tokens'] = $tokens;
+        }
+
+        return $this->getResult('requestCampaign', $args);
+    }
+
+    /**
      * Internal helper method to actually perform command.
      *
      * @param string $command

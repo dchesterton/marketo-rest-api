@@ -11,11 +11,5 @@ use CSD\Marketo\Response;
  */
 class RequestCampaignResponse extends Response
 {
-    /**
-     * @return array|null
-     */
-    public function requestCampaign()
-    {
-        return $this->getResult();
-    }
+
 }
