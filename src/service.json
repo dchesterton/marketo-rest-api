@@ -97,6 +97,15 @@
             },
             "responseClass": "CSD\\Marketo\\Response\\GetCampaignResponse"
         },
+        "requestCampaign": {
+            "httpMethod": "POST",
+            "uri": "campaigns/{id}/trigger.json",
+            "parameters": {
+                "id": {"location": "uri"},
+                "input": {"location": "json"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\RequestCampaignResponse"
+        },
         "createOrUpdateLeads": {
             "httpMethod": "POST",
             "uri": "leads.json",
