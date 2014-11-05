@@ -68,9 +68,8 @@
             "httpMethod": "GET",
             "uri": "lead/{id}.json",
             "parameters": {
-                "id": {
-                    "location": "uri"
-                }
+                "id": {"location": "uri"},
+                "fields": {"location": "query"}
             },
             "responseClass": "CSD\\Marketo\\Response\\GetLeadResponse"
         },

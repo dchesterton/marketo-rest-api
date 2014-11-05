@@ -277,15 +277,21 @@ class Client extends GuzzleClient
      * Get a lead by ID.
      *
      * @param int   $id
+     * @param array $fields
      * @param array $args
      *
      * @link http://developers.marketo.com/documentation/rest/get-lead-by-id/
      *
      * @return GetLeadResponse
      */
-    public function getLead($id, $args = array())
+    public function getLead($id, $fields = null, $args = array())
     {
         $args['id'] = $id;
+
+        if (is_array($fields)) {
+            $args['fields'] = implode(',', $fields);
+        }
+
         return $this->getResult('getLead', $args);
     }
 
@@ -403,6 +409,8 @@ class Client extends GuzzleClient
             $url = preg_replace('/id%5B([0-9]+)%5D/', 'id', $cmd->getRequest()->getUrl());
             $cmd->getRequest()->setUrl($url);
         }
+
+        $cmd->prepare();
 
         return $cmd->getResult();
     }
