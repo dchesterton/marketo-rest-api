@@ -50,6 +50,14 @@ class Response implements ResponseClassInterface
     }
 
     /**
+     * @return string
+     */
+    public function getNextPageToken()
+    {
+        return isset($this->data['nextPageToken'])? $this->data['nextPageToken']: null;
+    }
+
+    /**
      * @return bool
      */
     public function isSuccess()
