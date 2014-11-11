@@ -416,6 +416,35 @@ class Client extends GuzzleClient
     }
 
     /**
+     * Schedule a campaign
+     *
+     * @param int       $id     Campaign ID
+     * @param array     $tokens Key value array of tokens to send new values for.
+     * @param array     $args
+     *
+     * @link http://developers.marketo.com/documentation/rest/schedule-campaign/
+     *
+     * @return ScheduleCampaignResponse
+     */
+    public function scheduleCampaign($id, $datetime = NULL, $tokens = array(), $args = array())
+    {
+        $args['id'] = $id;
+
+        if (!empty($datetime)) {
+          if (is_numeric($datetime)) {
+            $datetime = date('c', $datetime);
+          }
+          $args['input']['runAt'] = $datetime;
+        }
+
+        if (!empty($tokens)) {
+            $args['input']['tokens'] = $tokens;
+        }
+
+        return $this->getResult('scheduleCampaign', $args);
+    }
+
+    /**
      * Internal helper method to actually perform command.
      *
      * @param string $command
