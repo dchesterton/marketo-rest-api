@@ -418,9 +418,10 @@ class Client extends GuzzleClient
     /**
      * Schedule a campaign
      *
-     * @param int       $id     Campaign ID
-     * @param array     $tokens Key value array of tokens to send new values for.
-     * @param array     $args
+     * @param int         $id        Campaign ID
+     * @param int|string  $datetime  Either a timestamp or an ISO 8601 formatted date string.
+     * @param array       $tokens    Key value array of tokens to send new values for.
+     * @param array       $args
      *
      * @link http://developers.marketo.com/documentation/rest/schedule-campaign/
      *
