@@ -105,6 +105,15 @@
             },
             "responseClass": "CSD\\Marketo\\Response\\RequestCampaignResponse"
         },
+        "scheduleCampaign": {
+            "httpMethod": "POST",
+            "uri": "campaigns/{id}/schedule.json",
+            "parameters": {
+                "id": {"location": "uri"},
+                "input": {"location": "json"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\ScheduleCampaignResponse"
+        },
         "createOrUpdateLeads": {
             "httpMethod": "POST",
             "uri": "leads.json",

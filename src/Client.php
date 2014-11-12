@@ -416,6 +416,33 @@ class Client extends GuzzleClient
     }
 
     /**
+     * Schedule a campaign
+     *
+     * @param int         $id      Campaign ID
+     * @param DateTime    $runAt   The time to run the campaign. If not provided, campaign will be run in 5 minutes.
+     * @param array       $tokens  Key value array of tokens to send new values for.
+     * @param array       $args
+     *
+     * @link http://developers.marketo.com/documentation/rest/schedule-campaign/
+     *
+     * @return ScheduleCampaignResponse
+     */
+    public function scheduleCampaign($id, \DateTime $runAt = NULL, $tokens = array(), $args = array())
+    {
+        $args['id'] = $id;
+
+        if (!empty($runAt)) {
+          $args['input']['runAt'] = $runAt->format('c');
+        }
+
+        if (!empty($tokens)) {
+            $args['input']['tokens'] = $tokens;
+        }
+
+        return $this->getResult('scheduleCampaign', $args);
+    }
+
+    /**
      * Internal helper method to actually perform command.
      *
      * @param string $command
