@@ -133,6 +133,15 @@
             },
             "responseClass": "CSD\\Marketo\\Response\\AddOrRemoveLeadsToListResponse"
         },
+        "associateLead": {
+            "httpMethod": "POST",
+            "uri": "leads/{id}/associate.json",
+            "parameters": {
+                "id": {"location": "uri"},
+                "cookie": {"location": "json"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\AssociateLeadResponse"
+        },
         "removeLeadsFromList": {
             "httpMethod": "DELETE",
             "uri": "lists/{listId}/leads.json",

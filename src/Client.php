@@ -18,6 +18,7 @@ use Guzzle\Service\Description\ServiceDescription;
 
 // Response classes
 use CSD\Marketo\Response\AddOrRemoveLeadsToListResponse;
+use CSD\Marketo\Response\AssociateLeadResponse;
 use CSD\Marketo\Response\CreateOrUpdateLeadsResponse;
 use CSD\Marketo\Response\GetCampaignResponse;
 use CSD\Marketo\Response\GetCampaignsResponse;
@@ -440,6 +441,28 @@ class Client extends GuzzleClient
         }
 
         return $this->getResult('scheduleCampaign', $args);
+    }
+
+    /**
+     * Associate a lead
+     *
+     * @param int       $id
+     * @param string    $cookie
+     * @param array     $args
+     *
+     * @link http://developers.marketo.com/documentation/rest/associate-lead/
+     *
+     * @return AssociateLeadResponse
+     */
+    public function associateLead($id, $cookie = null, $args = array())
+    {
+        $args['id'] = $id;
+
+        if (!empty($cookie)) {
+            $args['cookie'] = $cookie;
+        }
+
+        return $this->getResult('associateLead', $args);
     }
 
     /**
