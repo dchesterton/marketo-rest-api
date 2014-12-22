@@ -138,7 +138,7 @@
             "uri": "leads/{id}/associate.json",
             "parameters": {
                 "id": {"location": "uri"},
-                "cookie": {"location": "json"}
+                "cookie": {"location": "query"}
             },
             "responseClass": "CSD\\Marketo\\Response\\AssociateLeadResponse"
         },
