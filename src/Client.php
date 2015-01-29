@@ -71,6 +71,7 @@ class Client extends GuzzleClient
         $client = new self($restUrl, $config);
         $client->addSubscriber($auth);
         $client->setDescription(ServiceDescription::factory(__DIR__ . '/service.json'));
+        $client->setDefaultOption('headers/Content-Type', 'application/json');
 
         return $client;
     }
