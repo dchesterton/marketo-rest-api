@@ -13,6 +13,7 @@ Setup
 The client is built on [Guzzle 3](http://guzzle3.readthedocs.org) and uses a factory method to create an instance.
 You must specify either a Munchkin ID or the full url.
 
+####For Rest Api access:
 ```php
 use CSD\Marketo\Client;
 
@@ -20,6 +21,18 @@ $client = Client::factory(array(
     'client_id' => 'Marketo client ID',         // required
     'client_secret' => 'Marketo client secret', // required
     'munchkin_id' => '100-AEK-913' // alternatively, you can supply the full URL, e.g. 'url' => 'https://100-AEK-913.mktorest.com'
+));
+```
+
+####For Bulk Api access:
+```php
+use CSD\Marketo\Client;
+
+$client = Client::factory(array(
+    'client_id' => 'Marketo client ID',         // required
+    'client_secret' => 'Marketo client secret', // required
+    'munchkin_id' => '100-AEK-913' // alternatively, you can supply the full URL, e.g. 'url' => 'https://100-AEK-913.mktorest.com'
+    'bulk' => true // if uploading leads via file upload (i.e. csv)
 ));
 ```
 

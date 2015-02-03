@@ -45,7 +45,8 @@ class Client extends GuzzleClient
         $default = array(
             'url' => false,
             'munchkin_id' => false,
-            'version' => 1
+            'version' => 1,
+            'bulk' => false
         );
 
         $required = array('client_id', 'client_secret', 'version');
@@ -66,7 +67,11 @@ class Client extends GuzzleClient
         $grantType = new Credentials($url, $config->get('client_id'), $config->get('client_secret'));
         $auth = new Oauth2Plugin($grantType);
 
-        $restUrl = sprintf('%s/rest/v%d', rtrim($url, '/'), $config->get('version'));
+        if ($config->get('bulk') === true) {
+            $restUrl = sprintf('%s/bulk/v%d', rtrim($url, '/'), $config->get('version'));
+        } else {
+            $restUrl = sprintf('%s/rest/v%d', rtrim($url, '/'), $config->get('version'));
+        }
 
         $client = new self($restUrl, $config);
         $client->addSubscriber($auth);
@@ -74,6 +79,84 @@ class Client extends GuzzleClient
         $client->setDefaultOption('headers/Content-Type', 'application/json');
 
         return $client;
+    }
+
+    /**
+     * Import Leads via file upload 
+     * 
+     * @param array $args - Must contain 'format' and 'file' keys
+     *     i.e. array( 'format' => 'csv', 'file' => '/full/path/to/filename.csv'
+     * @return array
+     * 
+     * @link http://developers.marketo.com/documentation/rest/import-lead/
+     * 
+     * @throws \Exception
+     */
+    public function importLeadsCsv($args)
+    {
+        if (!is_readable($args['file'])) {
+            throw new \Exception('Cannot read file: ' . $args['file']);
+        }
+        
+        if (empty($args['format'])) {
+            $args['format'] = 'csv';
+        }
+
+        return $this->getResult('importLeadsCsv', $args);
+    }
+
+    /**
+     * Get status of an async Import Lead file upload
+     * 
+     * @param int $batchId
+     * 
+     * @link http://developers.marketo.com/documentation/rest/get-import-lead-status/
+     * 
+     * @return array
+     */
+    public function getBulkUploadStatus($batchId) 
+    {
+        if (empty($batchId) || !is_int($batchId)) {
+            throw new \Exception('Invalid $batchId provided in '.__CLASS__.'::'.__METHOD__);
+        }
+
+        return $this->getResult('getBulkUploadStatus', array('batchId' => $batchId));
+    }
+
+    /**
+     * Get failed lead results from an Import Lead file upload
+     * 
+     * @param int $batchId
+     * 
+     * @link http://developers.marketo.com/documentation/rest/get-import-failure-file/
+     * 
+     * @return array
+     */
+    public function getBulkUploadFailures($batchId) 
+    {
+        if( empty($batchId) || !is_int($batchId) ) {
+            throw new \Exception('Invalid $batchId provided in '.__CLASS__.'::'.__METHOD__);
+        }
+        
+        return $this->getResult('getBulkUploadFailures', array('batchId' => $batchId));
+    }
+
+    /**
+     * Get warnings from Import Lead file upload
+     * 
+     * @param int $batchId
+     * 
+     * @link http://developers.marketo.com/documentation/rest/get-import-warning-file/
+     *
+     * @return array
+     */
+    public function getBulkUploadWarnings($batchId) 
+    {
+        if( empty($batchId) || !is_int($batchId) ) {
+            throw new \Exception('Invalid $batchId provided in '.__CLASS__.'::'.__METHOD__);
+        }
+
+        return $this->getResult('getBulkUploadWarnings', array('batchId' => $batchId));
     }
 
     /**
