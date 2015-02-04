@@ -118,7 +118,7 @@ class Client extends GuzzleClient
     public function getBulkUploadStatus($batchId) 
     {
         if (empty($batchId) || !is_int($batchId)) {
-            throw new \Exception('Invalid $batchId provided in '.__CLASS__.'::'.__METHOD__);
+            throw new \Exception('Invalid $batchId provided in ' . __METHOD__);
         }
 
         return $this->getResult('getBulkUploadStatus', array('batchId' => $batchId));
@@ -136,7 +136,7 @@ class Client extends GuzzleClient
     public function getBulkUploadFailures($batchId) 
     {
         if( empty($batchId) || !is_int($batchId) ) {
-            throw new \Exception('Invalid $batchId provided in '.__CLASS__.'::'.__METHOD__);
+            throw new \Exception('Invalid $batchId provided in ' . __METHOD__);
         }
         
         return $this->getResult('getBulkUploadFailures', array('batchId' => $batchId));
@@ -154,7 +154,7 @@ class Client extends GuzzleClient
     public function getBulkUploadWarnings($batchId) 
     {
         if( empty($batchId) || !is_int($batchId) ) {
-            throw new \Exception('Invalid $batchId provided in '.__CLASS__.'::'.__METHOD__);
+            throw new \Exception('Invalid $batchId provided in ' . __METHOD__);
         }
 
         return $this->getResult('getBulkUploadWarnings', array('batchId' => $batchId));
