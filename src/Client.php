@@ -85,10 +85,11 @@ class Client extends GuzzleClient
      * Import Leads via file upload 
      * 
      * @param array $args - Must contain 'format' and 'file' keys
-     *     i.e. array( 'format' => 'csv', 'file' => '/full/path/to/filename.csv'
-     * @return array
+     *     e.g. array( 'format' => 'csv', 'file' => '/full/path/to/filename.csv'
      * 
      * @link http://developers.marketo.com/documentation/rest/import-lead/
+     * 
+     * @return array
      * 
      * @throws \Exception
      */
@@ -130,7 +131,7 @@ class Client extends GuzzleClient
      * 
      * @link http://developers.marketo.com/documentation/rest/get-import-failure-file/
      * 
-     * @return array
+     * @return Guzzle\Http\Message\Response
      */
     public function getBulkUploadFailures($batchId) 
     {
@@ -148,7 +149,7 @@ class Client extends GuzzleClient
      * 
      * @link http://developers.marketo.com/documentation/rest/get-import-warning-file/
      *
-     * @return array
+     * @return Guzzle\Http\Message\Response
      */
     public function getBulkUploadWarnings($batchId) 
     {

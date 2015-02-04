@@ -32,7 +32,7 @@ $client = Client::factory(array(
     'client_id' => 'Marketo client ID',         // required
     'client_secret' => 'Marketo client secret', // required
     'munchkin_id' => '100-AEK-913' // alternatively, you can supply the full URL, e.g. 'url' => 'https://100-AEK-913.mktorest.com'
-    'bulk' => true // if uploading leads via file upload (i.e. csv)
+    'bulk' => true // if uploading leads via file upload (e.g. csv)
 ));
 ```
 
