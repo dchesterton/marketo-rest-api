@@ -69,7 +69,8 @@
             "parameters": {
                 "filterType": {"location": "query"},
                 "filterValues": {"location": "query"},
-                "fields": {"location": "query"}
+                "fields": {"location": "query"},
+                "nextPageToken": {"location": "query", "required": false}
             },
             "responseClass": "CSD\\Marketo\\Response\\GetLeadsResponse"
         },

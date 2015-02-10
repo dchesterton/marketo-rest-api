@@ -299,23 +299,26 @@ class Client extends GuzzleClient
      * @param string $filterType   One of the supported filter types, e.g. id, cookie or email. See Marketo's documentation for all types.
      * @param string $filterValues Comma separated list of filter values
      * @param array  $fields       Array of field names to be returned in the response
-     *
+     * @param string $nextPageToken 
      * @link http://developers.marketo.com/documentation/rest/get-multiple-leads-by-filter-type/
      *
      * @return GetLeadsResponse
      */
-    public function getLeadsByFilterType($filterType, $filterValues, $fields = array())
+    public function getLeadsByFilterType($filterType, $filterValues, $fields = array(), $nextPageToken = null)
     {
         $args['filterType'] = $filterType;
         $args['filterValues'] = $filterValues;
-
+        if ( !empty($nextPageToken) ){
+          $args['nextPageToken'] = $nextPageToken;
+        }
+        
         if (count($fields)) {
             $args['fields'] = implode(',', $fields);
         }
 
         return $this->getResult('getLeadsByFilterType', $args);
     }
-
+    
     /**
      * Get a lead by filter type.
      *
