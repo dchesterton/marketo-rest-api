@@ -150,6 +150,15 @@
                 "id": {"location": "query"}
             },
             "responseClass": "CSD\\Marketo\\Response\\AddOrRemoveLeadsToListResponse"
+        },
+        "deleteLead": {
+            "httpMethod": "DELETE",
+            "uri": "leads.json",
+            "parameters": {
+                "listId": {"location": "uri"},
+                "id": {"location": "query"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\DeleteLeadResponse"
         }
     }
 }
