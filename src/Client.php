@@ -45,7 +45,8 @@ class Client extends GuzzleClient
         $default = array(
             'url' => false,
             'munchkin_id' => false,
-            'version' => 1
+            'version' => 1,
+            'bulk' => false
         );
 
         $required = array('client_id', 'client_secret', 'version');
@@ -66,7 +67,11 @@ class Client extends GuzzleClient
         $grantType = new Credentials($url, $config->get('client_id'), $config->get('client_secret'));
         $auth = new Oauth2Plugin($grantType);
 
-        $restUrl = sprintf('%s/rest/v%d', rtrim($url, '/'), $config->get('version'));
+        if ($config->get('bulk') === true) {
+            $restUrl = sprintf('%s/bulk/v%d', rtrim($url, '/'), $config->get('version'));
+        } else {
+            $restUrl = sprintf('%s/rest/v%d', rtrim($url, '/'), $config->get('version'));
+        }
 
         $client = new self($restUrl, $config);
         $client->addSubscriber($auth);
@@ -74,6 +79,85 @@ class Client extends GuzzleClient
         $client->setDefaultOption('headers/Content-Type', 'application/json');
 
         return $client;
+    }
+
+    /**
+     * Import Leads via file upload 
+     * 
+     * @param array $args - Must contain 'format' and 'file' keys
+     *     e.g. array( 'format' => 'csv', 'file' => '/full/path/to/filename.csv'
+     * 
+     * @link http://developers.marketo.com/documentation/rest/import-lead/
+     * 
+     * @return array
+     * 
+     * @throws \Exception
+     */
+    public function importLeadsCsv($args)
+    {
+        if (!is_readable($args['file'])) {
+            throw new \Exception('Cannot read file: ' . $args['file']);
+        }
+        
+        if (empty($args['format'])) {
+            $args['format'] = 'csv';
+        }
+
+        return $this->getResult('importLeadsCsv', $args);
+    }
+
+    /**
+     * Get status of an async Import Lead file upload
+     * 
+     * @param int $batchId
+     * 
+     * @link http://developers.marketo.com/documentation/rest/get-import-lead-status/
+     * 
+     * @return array
+     */
+    public function getBulkUploadStatus($batchId) 
+    {
+        if (empty($batchId) || !is_int($batchId)) {
+            throw new \Exception('Invalid $batchId provided in ' . __METHOD__);
+        }
+
+        return $this->getResult('getBulkUploadStatus', array('batchId' => $batchId));
+    }
+
+    /**
+     * Get failed lead results from an Import Lead file upload
+     * 
+     * @param int $batchId
+     * 
+     * @link http://developers.marketo.com/documentation/rest/get-import-failure-file/
+     * 
+     * @return Guzzle\Http\Message\Response
+     */
+    public function getBulkUploadFailures($batchId) 
+    {
+        if( empty($batchId) || !is_int($batchId) ) {
+            throw new \Exception('Invalid $batchId provided in ' . __METHOD__);
+        }
+        
+        return $this->getResult('getBulkUploadFailures', array('batchId' => $batchId));
+    }
+
+    /**
+     * Get warnings from Import Lead file upload
+     * 
+     * @param int $batchId
+     * 
+     * @link http://developers.marketo.com/documentation/rest/get-import-warning-file/
+     *
+     * @return Guzzle\Http\Message\Response
+     */
+    public function getBulkUploadWarnings($batchId) 
+    {
+        if( empty($batchId) || !is_int($batchId) ) {
+            throw new \Exception('Invalid $batchId provided in ' . __METHOD__);
+        }
+
+        return $this->getResult('getBulkUploadWarnings', array('batchId' => $batchId));
     }
 
     /**
@@ -215,23 +299,26 @@ class Client extends GuzzleClient
      * @param string $filterType   One of the supported filter types, e.g. id, cookie or email. See Marketo's documentation for all types.
      * @param string $filterValues Comma separated list of filter values
      * @param array  $fields       Array of field names to be returned in the response
-     *
+     * @param string $nextPageToken 
      * @link http://developers.marketo.com/documentation/rest/get-multiple-leads-by-filter-type/
      *
      * @return GetLeadsResponse
      */
-    public function getLeadsByFilterType($filterType, $filterValues, $fields = array())
+    public function getLeadsByFilterType($filterType, $filterValues, $fields = array(), $nextPageToken = null)
     {
         $args['filterType'] = $filterType;
         $args['filterValues'] = $filterValues;
-
+        if ( !empty($nextPageToken) ){
+          $args['nextPageToken'] = $nextPageToken;
+        }
+        
         if (count($fields)) {
             $args['fields'] = implode(',', $fields);
         }
 
         return $this->getResult('getLeadsByFilterType', $args);
     }
-
+    
     /**
      * Get a lead by filter type.
      *
