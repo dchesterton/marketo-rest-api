@@ -391,6 +391,23 @@ class Client extends GuzzleClient
     }
 
     /**
+     * Delete one or more leads
+     *
+     * @param int|array $leads  Either a single lead ID or an array of lead IDs
+     * @param array     $args
+     *
+     * @link http://developers.marketo.com/documentation/rest/delete-lead/
+     *
+     * @return DeleteLeadResponse
+     */
+    public function deleteLead($leads, $args = array(), $returnRaw = false)
+    {
+        $args['id'] = (array) $leads;
+
+        return $this->getResult('deleteLead', $args, true, $returnRaw);
+    }
+
+    /**
      * Trigger a campaign for one or more leads.
      *
      * @param int       $id     Campaign ID
