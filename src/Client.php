@@ -93,7 +93,7 @@ class Client extends GuzzleClient
      *
      * @return CreateOrUpdateLeadsResponse
      */
-    private function createOrUpdateLeadsCommand($action, $leads, $lookupField, $args)
+    private function createOrUpdateLeadsCommand($action, $leads, $lookupField, $args, $returnRaw = false)
     {
         $args['input'] = $leads;
         $args['action'] = $action;
@@ -102,7 +102,7 @@ class Client extends GuzzleClient
             $args['lookupField'] = $lookupField;
         }
 
-        return $this->getResult('createOrUpdateLeads', $args);
+        return $this->getResult('createOrUpdateLeads', $args, false, $returnRaw);
     }
 
     /**
@@ -183,13 +183,13 @@ class Client extends GuzzleClient
      *
      * @return GetListsResponse
      */
-    public function getLists($ids = null, $args = array())
+    public function getLists($ids = null, $args = array(), $returnRaw = false)
     {
         if ($ids) {
             $args['id'] = $ids;
         }
 
-        return $this->getResult('getLists', $args, is_array($ids));
+        return $this->getResult('getLists', $args, is_array($ids), $returnRaw);
     }
 
     /**
@@ -202,11 +202,11 @@ class Client extends GuzzleClient
      *
      * @return GetListResponse
      */
-    public function getList($id, $args = array())
+    public function getList($id, $args = array(), $returnRaw = false)
     {
         $args['id'] = $id;
 
-        return $this->getResult('getList', $args);
+        return $this->getResult('getList', $args, false, $returnRaw);
     }
 
     /**
@@ -220,7 +220,7 @@ class Client extends GuzzleClient
      *
      * @return GetLeadsResponse
      */
-    public function getLeadsByFilterType($filterType, $filterValues, $fields = array())
+    public function getLeadsByFilterType($filterType, $filterValues, $fields = array(), $returnRaw = false)
     {
         $args['filterType'] = $filterType;
         $args['filterValues'] = $filterValues;
@@ -229,7 +229,7 @@ class Client extends GuzzleClient
             $args['fields'] = implode(',', $fields);
         }
 
-        return $this->getResult('getLeadsByFilterType', $args);
+        return $this->getResult('getLeadsByFilterType', $args, false, $returnRaw);
     }
 
     /**
@@ -246,7 +246,7 @@ class Client extends GuzzleClient
      *
      * @return GetLeadResponse
      */
-    public function getLeadByFilterType($filterType, $filterValue, $fields = array())
+    public function getLeadByFilterType($filterType, $filterValue, $fields = array(), $returnRaw = false)
     {
         $args['filterType'] = $filterType;
         $args['filterValues'] = $filterValue;
@@ -255,7 +255,7 @@ class Client extends GuzzleClient
             $args['fields'] = implode(',', $fields);
         }
 
-        return $this->getResult('getLeadByFilterType', $args);
+        return $this->getResult('getLeadByFilterType', $args, false, $returnRaw);
     }
 
     /**
@@ -268,11 +268,11 @@ class Client extends GuzzleClient
      *
      * @return GetLeadsResponse
      */
-    public function getLeadsByList($listId, $args = array())
+    public function getLeadsByList($listId, $args = array(), $returnRaw = false)
     {
         $args['listId'] = $listId;
 
-        return $this->getResult('getLeadsByList', $args);
+        return $this->getResult('getLeadsByList', $args, false, $returnRaw);
     }
 
     /**
@@ -286,7 +286,7 @@ class Client extends GuzzleClient
      *
      * @return GetLeadResponse
      */
-    public function getLead($id, $fields = null, $args = array())
+    public function getLead($id, $fields = null, $args = array(), $returnRaw = false)
     {
         $args['id'] = $id;
 
@@ -294,7 +294,7 @@ class Client extends GuzzleClient
             $args['fields'] = implode(',', $fields);
         }
 
-        return $this->getResult('getLead', $args);
+        return $this->getResult('getLead', $args, false, $returnRaw);
     }
 
     /**
@@ -308,12 +308,12 @@ class Client extends GuzzleClient
      *
      * @return IsMemberOfListResponse
      */
-    public function isMemberOfList($listId, $id, $args = array())
+    public function isMemberOfList($listId, $id, $args = array(), $returnRaw = false)
     {
         $args['listId'] = $listId;
         $args['id'] = $id;
 
-        return $this->getResult('isMemberOfList', $args, is_array($id));
+        return $this->getResult('isMemberOfList', $args, is_array($id), $returnRaw);
     }
 
     /**
@@ -326,11 +326,11 @@ class Client extends GuzzleClient
      *
      * @return GetCampaignResponse
      */
-    public function getCampaign($id, $args = array())
+    public function getCampaign($id, $args = array(), $returnRaw = false)
     {
         $args['id'] = $id;
 
-        return $this->getResult('getCampaign', $args);
+        return $this->getResult('getCampaign', $args, false, $returnRaw);
     }
 
     /**
@@ -343,13 +343,13 @@ class Client extends GuzzleClient
      *
      * @return GetCampaignsResponse
      */
-    public function getCampaigns($ids = null, $args = array())
+    public function getCampaigns($ids = null, $args = array(), $returnRaw = false)
     {
         if ($ids) {
             $args['id'] = $ids;
         }
 
-        return $this->getResult('getCampaigns', $args, is_array($ids));
+        return $this->getResult('getCampaigns', $args, is_array($ids), $returnRaw);
     }
 
     /**
@@ -363,12 +363,12 @@ class Client extends GuzzleClient
      *
      * @return AddOrRemoveLeadsToListResponse
      */
-    public function addLeadsToList($listId, $leads, $args = array())
+    public function addLeadsToList($listId, $leads, $args = array(), $returnRaw = false)
     {
         $args['listId'] = $listId;
         $args['id'] = (array) $leads;
 
-        return $this->getResult('addLeadsToList', $args, true);
+        return $this->getResult('addLeadsToList', $args, true, $returnRaw);
     }
 
     /**
@@ -382,12 +382,12 @@ class Client extends GuzzleClient
      *
      * @return AddOrRemoveLeadsToListResponse
      */
-    public function removeLeadsFromList($listId, $leads, $args = array())
+    public function removeLeadsFromList($listId, $leads, $args = array(), $returnRaw = false)
     {
         $args['listId'] = $listId;
         $args['id'] = (array) $leads;
 
-        return $this->getResult('removeLeadsFromList', $args, true);
+        return $this->getResult('removeLeadsToList', $args, true, $returnRaw);
     }
 
     /**
@@ -400,11 +400,11 @@ class Client extends GuzzleClient
      *
      * @return DeleteLeadResponse
      */
-    public function deleteLead($leads, $args = array())
+    public function deleteLead($leads, $args = array(), $returnRaw = false)
     {
         $args['id'] = (array) $leads;
 
-        return $this->getResult('deleteLead', $args, true);
+        return $this->getResult('deleteLead', $args, true, $returnRaw);
     }
 
     /**
@@ -419,7 +419,7 @@ class Client extends GuzzleClient
      *
      * @return RequestCampaignResponse
      */
-    public function requestCampaign($id, $leads, $tokens = array(), $args = array())
+    public function requestCampaign($id, $leads, $tokens = array(), $args = array(), $returnRaw = false)
     {
         $args['id'] = $id;
 
@@ -431,7 +431,7 @@ class Client extends GuzzleClient
             $args['input']['tokens'] = $tokens;
         }
 
-        return $this->getResult('requestCampaign', $args);
+        return $this->getResult('requestCampaign', $args, false, $returnRaw);
     }
 
     /**
@@ -446,7 +446,7 @@ class Client extends GuzzleClient
      *
      * @return ScheduleCampaignResponse
      */
-    public function scheduleCampaign($id, \DateTime $runAt = NULL, $tokens = array(), $args = array())
+    public function scheduleCampaign($id, \DateTime $runAt = NULL, $tokens = array(), $args = array(), $returnRaw = false)
     {
         $args['id'] = $id;
 
@@ -458,7 +458,7 @@ class Client extends GuzzleClient
             $args['input']['tokens'] = $tokens;
         }
 
-        return $this->getResult('scheduleCampaign', $args);
+        return $this->getResult('scheduleCampaign', $args, false, $returnRaw);
     }
 
     /**
@@ -472,7 +472,7 @@ class Client extends GuzzleClient
      *
      * @return AssociateLeadResponse
      */
-    public function associateLead($id, $cookie = null, $args = array())
+    public function associateLead($id, $cookie = null, $args = array(), $returnRaw = false)
     {
         $args['id'] = $id;
 
@@ -480,7 +480,7 @@ class Client extends GuzzleClient
             $args['cookie'] = $cookie;
         }
 
-        return $this->getResult('associateLead', $args);
+        return $this->getResult('associateLead', $args, false, $returnRaw);
     }
 
     /**
@@ -492,7 +492,7 @@ class Client extends GuzzleClient
      *
      * @return Response
      */
-    private function getResult($command, $args, $fixArgs = false)
+    private function getResult($command, $args, $fixArgs = false, $returnRaw = false)
     {
         $cmd = $this->getCommand($command, $args);
 
@@ -506,6 +506,10 @@ class Client extends GuzzleClient
         }
 
         $cmd->prepare();
+
+        if ($returnRaw) {
+            return $cmd->getResponse()->getBody(true);
+        }
 
         return $cmd->getResult();
     }
