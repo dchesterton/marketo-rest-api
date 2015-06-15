@@ -189,6 +189,14 @@
                 "id": {"location": "query"}
             },
             "responseClass": "CSD\\Marketo\\Response\\DeleteLeadResponse"
+        },
+        "getPagingToken": {
+            "httpMethod": "GET",
+            "uri": "activities/pagingtoken.json",
+            "parameters": {
+                "sinceDatetime": {"location": "query"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\GetPagingToken"
         }
     }
 }
