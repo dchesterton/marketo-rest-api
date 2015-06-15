@@ -12,6 +12,7 @@ namespace CSD\Marketo;
 
 // Guzzle
 use CommerceGuys\Guzzle\Plugin\Oauth2\Oauth2Plugin;
+use CSD\Marketo\Response\GetLeadChanges;
 use CSD\Marketo\Response\GetPagingToken;
 use Guzzle\Common\Collection;
 use Guzzle\Service\Client as GuzzleClient;
@@ -588,6 +589,31 @@ class Client extends GuzzleClient
         $args['sinceDatetime'] = $sinceDatetime;
 
         return $this->getResult('getPagingToken', $args, false, $returnRaw);
+    }
+
+    /**
+     * Get lead changes
+     *
+     * @param string       $nextPageToken Next page token
+     * @param string|array $fields
+     * @param array        $args
+     * @param bool         $returnRaw
+     *
+     * @return GetLeadChanges
+     * @link http://developers.marketo.com/documentation/rest/get-lead-changes/
+     * @see  getPagingToken
+     *
+     */
+    public function getLeadChanges($nextPageToken, $fields, $args = array(), $returnRaw = false)
+    {
+        $args['nextPageToken'] = $nextPageToken;
+        $args['fields'] = (array) $fields;
+
+        if (count($fields)) {
+            $args['fields'] = implode(',', $fields);
+        }
+
+        return $this->getResult('getLeadChanges', $args, true, $returnRaw);
     }
 
     /**

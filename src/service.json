@@ -197,6 +197,18 @@
                 "sinceDatetime": {"location": "query"}
             },
             "responseClass": "CSD\\Marketo\\Response\\GetPagingToken"
+        },
+        "getLeadChanges": {
+            "httpMethod": "GET",
+            "uri": "activities/leadchanges.json",
+            "parameters": {
+                "nextPageToken": {"location": "query"},
+                "batchSize": {"location": "query"},
+                "nextPageToken": {"location": "query"},
+                "listId": {"location": "query"},
+                "fields": {"location": "query"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\GetLeadChanges"
         }
     }
 }
