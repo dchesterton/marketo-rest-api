@@ -12,6 +12,7 @@ namespace CSD\Marketo;
 
 // Guzzle
 use CommerceGuys\Guzzle\Plugin\Oauth2\Oauth2Plugin;
+use CSD\Marketo\Response\GetPagingToken;
 use Guzzle\Common\Collection;
 use Guzzle\Service\Client as GuzzleClient;
 use Guzzle\Service\Description\ServiceDescription;
@@ -569,6 +570,24 @@ class Client extends GuzzleClient
         }
 
         return $this->getResult('associateLead', $args, false, $returnRaw);
+    }
+
+    /**
+     * Get the paging token required for lead activity and changes
+     *
+     * @param string $sinceDatetime String containing a datetime
+     * @param array  $args
+     * @param bool   $returnRaw
+     *
+     * @return GetPagingToken
+     * @link http://developers.marketo.com/documentation/rest/get-paging-token/
+     *
+     */
+    public function getPagingToken($sinceDatetime, $args = array(), $returnRaw = false)
+    {
+        $args['sinceDatetime'] = $sinceDatetime;
+
+        return $this->getResult('getPagingToken', $args, false, $returnRaw);
     }
 
     /**
