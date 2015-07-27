@@ -477,7 +477,7 @@ class Client extends GuzzleClient
         $args['listId'] = $listId;
         $args['id'] = (array) $leads;
 
-        return $this->getResult('removeLeadsToList', $args, true, $returnRaw);
+        return $this->getResult('removeLeadsFromList', $args, true, $returnRaw);
     }
 
     /**
