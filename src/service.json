@@ -209,6 +209,12 @@
                 "fields": {"location": "query"}
             },
             "responseClass": "CSD\\Marketo\\Response\\GetLeadChanges"
+        },
+        "getLeadPartitions": {
+            "httpMethod": "GET",
+            "uri": "leads/partitions.json",
+            "parameters": {},
+            "responseClass": "CSD\\Marketo\\Response\\GetLeadPartitionsResponse"
         }
     }
 }
