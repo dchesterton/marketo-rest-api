@@ -25,6 +25,7 @@ use CSD\Marketo\Response\CreateOrUpdateLeadsResponse;
 use CSD\Marketo\Response\GetCampaignResponse;
 use CSD\Marketo\Response\GetCampaignsResponse;
 use CSD\Marketo\Response\GetLeadResponse;
+use CSD\Marketo\Response\GetLeadPartitionsResponse;
 use CSD\Marketo\Response\GetLeadsResponse;
 use CSD\Marketo\Response\GetListResponse;
 use CSD\Marketo\Response\GetListsResponse;
@@ -84,15 +85,15 @@ class Client extends GuzzleClient
     }
 
     /**
-     * Import Leads via file upload 
-     * 
+     * Import Leads via file upload
+     *
      * @param array $args - Must contain 'format' and 'file' keys
      *     e.g. array( 'format' => 'csv', 'file' => '/full/path/to/filename.csv'
-     * 
+     *
      * @link http://developers.marketo.com/documentation/rest/import-lead/
-     * 
+     *
      * @return array
-     * 
+     *
      * @throws \Exception
      */
     public function importLeadsCsv($args)
@@ -100,7 +101,7 @@ class Client extends GuzzleClient
         if (!is_readable($args['file'])) {
             throw new \Exception('Cannot read file: ' . $args['file']);
         }
-        
+
         if (empty($args['format'])) {
             $args['format'] = 'csv';
         }
@@ -110,14 +111,14 @@ class Client extends GuzzleClient
 
     /**
      * Get status of an async Import Lead file upload
-     * 
+     *
      * @param int $batchId
-     * 
+     *
      * @link http://developers.marketo.com/documentation/rest/get-import-lead-status/
-     * 
+     *
      * @return array
      */
-    public function getBulkUploadStatus($batchId) 
+    public function getBulkUploadStatus($batchId)
     {
         if (empty($batchId) || !is_int($batchId)) {
             throw new \Exception('Invalid $batchId provided in ' . __METHOD__);
@@ -128,32 +129,32 @@ class Client extends GuzzleClient
 
     /**
      * Get failed lead results from an Import Lead file upload
-     * 
+     *
      * @param int $batchId
-     * 
+     *
      * @link http://developers.marketo.com/documentation/rest/get-import-failure-file/
-     * 
+     *
      * @return Guzzle\Http\Message\Response
      */
-    public function getBulkUploadFailures($batchId) 
+    public function getBulkUploadFailures($batchId)
     {
         if( empty($batchId) || !is_int($batchId) ) {
             throw new \Exception('Invalid $batchId provided in ' . __METHOD__);
         }
-        
+
         return $this->getResult('getBulkUploadFailures', array('batchId' => $batchId));
     }
 
     /**
      * Get warnings from Import Lead file upload
-     * 
+     *
      * @param int $batchId
-     * 
+     *
      * @link http://developers.marketo.com/documentation/rest/get-import-warning-file/
      *
      * @return Guzzle\Http\Message\Response
      */
-    public function getBulkUploadWarnings($batchId) 
+    public function getBulkUploadWarnings($batchId)
     {
         if( empty($batchId) || !is_int($batchId) ) {
             throw new \Exception('Invalid $batchId provided in ' . __METHOD__);
@@ -301,7 +302,7 @@ class Client extends GuzzleClient
      * @param string $filterType   One of the supported filter types, e.g. id, cookie or email. See Marketo's documentation for all types.
      * @param string $filterValues Comma separated list of filter values
      * @param array  $fields       Array of field names to be returned in the response
-     * @param string $nextPageToken 
+     * @param string $nextPageToken
      * @link http://developers.marketo.com/documentation/rest/get-multiple-leads-by-filter-type/
      *
      * @return GetLeadsResponse
@@ -314,14 +315,14 @@ class Client extends GuzzleClient
         if ($nextPageToken) {
             $args['nextPageToken'] = $nextPageToken;
         }
-        
+
         if (count($fields)) {
             $args['fields'] = implode(',', $fields);
         }
 
         return $this->getResult('getLeadsByFilterType', $args, false, $returnRaw);
     }
-    
+
     /**
      * Get a lead by filter type.
      *
@@ -346,6 +347,18 @@ class Client extends GuzzleClient
         }
 
         return $this->getResult('getLeadByFilterType', $args, false, $returnRaw);
+    }
+
+    /**
+     * Get lead partitions.
+     *
+     * @link http://developers.marketo.com/documentation/rest/get-lead-partitions/
+     *
+     * @return GetLeadPartitionsResponse
+     */
+    public function getLeadPartitions($args = array(), $returnRaw = false)
+    {
+        return $this->getResult('getLeadPartitions', $args, false, $returnRaw);
     }
 
     /**
