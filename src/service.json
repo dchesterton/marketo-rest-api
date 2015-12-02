@@ -216,6 +216,37 @@
             "uri": "leads/partitions.json",
             "parameters": {},
             "responseClass": "CSD\\Marketo\\Response\\GetLeadPartitionsResponse"
+        },
+        "updateEmailContent": {
+            "httpMethod": "POST",
+            "uri": "/rest/asset/v1/email/{id}/content.json",
+            "parameters": {
+                "id": {"location": "uri"},
+                "subject": {"location": "query"},
+                "fromEmail": {"location": "query"},
+                "fromName": {"location": "query"},
+                "replyTo": {"location": "query"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\UpdateEmailContentReponse"
+        },
+        "updateEmailContentInEditableSection": {
+            "httpMethod": "POST",
+            "uri": "/rest/asset/v1/email/{id}/content/{htmlId}.json",
+            "parameters": {
+                "id": {"location": "uri"},
+                "htmlId": {"location": "uri"},
+                "type": {"location": "query"},
+                "value": {"location": "query"}
+                },
+            "responseClass": "CSD\\Marketo\\Response\\UpdateEmailContentInEditableSectionResponse"
+        },
+        "approveEmailbyId": {
+            "httpMethod": "POST",
+            "uri": "/rest/asset/v1/email/{id}/approveDraft.json",
+            "parameters": {
+                "id": {"location": "uri"}
+                },
+            "responseClass": "CSD\\Marketo\\Response\\ApproveEmailResponse"
         }
     }
 }

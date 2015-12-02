@@ -630,6 +630,61 @@ class Client extends GuzzleClient
     }
 
     /**
+     * Update an editable section in an email
+     *
+     * @param int       $emailId
+     * @param string    $htmlId
+     * @param array     $args
+     *
+     * @link http://developers.marketo.com/documentation/asset-api/update-email-content-by-id/
+     *
+     * @return Response
+     */
+    public function updateEmailContent($emailId, $args = array(), $returnRaw = false)
+    {
+        $args['id'] = $emailId;
+
+        return $this->getResult('updateEmailContent', $args, false, $returnRaw);
+    }
+
+    /**
+     * Update an editable section in an email
+     *
+     * @param int       $emailId
+     * @param string    $htmlId
+     * @param array     $args
+     *
+     * @link http://developers.marketo.com/documentation/asset-api/update-email-content-in-editable-section/
+     *
+     * @return UpdateEmailContentInEditableSectionResponse
+     */
+    public function updateEmailContentInEditableSection($emailId, $htmlId, $args = array(), $returnRaw = false)
+    {
+        $args['id'] = $emailId;
+        $args['htmlId'] = $htmlId;
+
+        return $this->getResult('updateEmailContentInEditableSection', $args, false, $returnRaw);
+    }
+
+    /**
+     * Approve an email
+     *
+     * @param int       $emailId
+     * @param string    $htmlId
+     * @param array     $args
+     *
+     * @link http://developers.marketo.com/documentation/asset-api/approve-email-by-id/
+     *
+     * @return approveEmail
+     */
+    public function approveEmail($emailId, $args = array(), $returnRaw = false)
+    {
+        $args['id'] = $emailId;
+
+        return $this->getResult('approveEmailbyId', $args, false, $returnRaw);
+    }
+
+    /**
      * Internal helper method to actually perform command.
      *
      * @param string $command
