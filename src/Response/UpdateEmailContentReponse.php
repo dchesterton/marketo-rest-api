@@ -14,7 +14,7 @@ use CSD\Marketo\Response;
  * Response for the update email content API method.
  *
  */
-class UpdateEmailContentReponse extends Response
+class UpdateEmailContentResponse extends Response
 {
 
 }
