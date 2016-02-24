@@ -114,6 +114,8 @@ class Client extends GuzzleClient
      *
      * @param int $batchId
      *
+     * @throws \Exception
+     *
      * @link http://developers.marketo.com/documentation/rest/get-import-lead-status/
      *
      * @return array
@@ -132,9 +134,11 @@ class Client extends GuzzleClient
      *
      * @param int $batchId
      *
+     * @throws \Exception
+     *
      * @link http://developers.marketo.com/documentation/rest/get-import-failure-file/
      *
-     * @return Guzzle\Http\Message\Response
+     * @return \Guzzle\Http\Message\Response
      */
     public function getBulkUploadFailures($batchId)
     {
@@ -150,9 +154,11 @@ class Client extends GuzzleClient
      *
      * @param int $batchId
      *
+     * @throws \Exception
+     *
      * @link http://developers.marketo.com/documentation/rest/get-import-warning-file/
      *
-     * @return Guzzle\Http\Message\Response
+     * @return \Guzzle\Http\Message\Response
      */
     public function getBulkUploadWarnings($batchId)
     {
@@ -170,6 +176,7 @@ class Client extends GuzzleClient
      * @param array  $leads
      * @param string $lookupField
      * @param array  $args
+     * @param bool   $returnRaw
      *
      * @see Client::createLeads()
      * @see Client::createOrUpdateLeads()
@@ -265,6 +272,7 @@ class Client extends GuzzleClient
      *
      * @param int|array $ids  Filter by one or more IDs
      * @param array     $args
+     * @param bool      $returnRaw
      *
      * @link http://developers.marketo.com/documentation/rest/get-multiple-lists/
      *
@@ -284,6 +292,7 @@ class Client extends GuzzleClient
      *
      * @param int   $id
      * @param array $args
+     * @param bool  $returnRaw
      *
      * @link http://developers.marketo.com/documentation/rest/get-list-by-id/
      *
@@ -303,6 +312,7 @@ class Client extends GuzzleClient
      * @param string $filterValues Comma separated list of filter values
      * @param array  $fields       Array of field names to be returned in the response
      * @param string $nextPageToken
+     * @param bool   $returnRaw
      * @link http://developers.marketo.com/documentation/rest/get-multiple-leads-by-filter-type/
      *
      * @return GetLeadsResponse
@@ -332,6 +342,7 @@ class Client extends GuzzleClient
      * @param string $filterType  One of the supported filter types, e.g. id, cookie or email. See Marketo's documentation for all types.
      * @param string $filterValue The value to filter by
      * @param array  $fields      Array of field names to be returned in the response
+     * @param bool   $returnRaw
      *
      * @link http://developers.marketo.com/documentation/rest/get-multiple-leads-by-filter-type/
      *
@@ -352,6 +363,9 @@ class Client extends GuzzleClient
     /**
      * Get lead partitions.
      *
+     * @param array $args
+     * @param bool $returnRaw
+     *
      * @link http://developers.marketo.com/documentation/rest/get-lead-partitions/
      *
      * @return GetLeadPartitionsResponse
@@ -366,6 +380,7 @@ class Client extends GuzzleClient
      *
      * @param int   $listId
      * @param array $args
+     * @param bool  $returnRaw
      *
      * @link http://developers.marketo.com/documentation/rest/get-multiple-leads-by-list-id/
      *
@@ -384,6 +399,7 @@ class Client extends GuzzleClient
      * @param int   $id
      * @param array $fields
      * @param array $args
+     * @param bool  $returnRaw
      *
      * @link http://developers.marketo.com/documentation/rest/get-lead-by-id/
      *
@@ -406,6 +422,7 @@ class Client extends GuzzleClient
      * @param int       $listId List ID
      * @param int|array $id     Lead ID or an array of Lead IDs
      * @param array     $args
+     * @param bool      $returnRaw
      *
      * @link http://developers.marketo.com/documentation/rest/member-of-list/
      *
@@ -424,6 +441,7 @@ class Client extends GuzzleClient
      *
      * @param int   $id
      * @param array $args
+     * @param bool  $returnRaw
      *
      * @link http://developers.marketo.com/documentation/rest/get-campaign-by-id/
      *
@@ -441,6 +459,7 @@ class Client extends GuzzleClient
      *
      * @param int|array $ids  A single Campaign ID or an array of Campaign IDs
      * @param array     $args
+     * @param bool      $returnRaw
      *
      * @link http://developers.marketo.com/documentation/rest/get-multiple-campaigns/
      *
@@ -461,6 +480,7 @@ class Client extends GuzzleClient
      * @param int       $listId List ID
      * @param int|array $leads  Either a single lead ID or an array of lead IDs
      * @param array     $args
+     * @param bool      $returnRaw
      *
      * @link http://developers.marketo.com/documentation/rest/add-leads-to-list/
      *
@@ -480,6 +500,7 @@ class Client extends GuzzleClient
      * @param int       $listId List ID
      * @param int|array $leads  Either a single lead ID or an array of lead IDs
      * @param array     $args
+     * @param bool      $returnRaw
      *
      * @link http://developers.marketo.com/documentation/rest/remove-leads-from-list/
      *
@@ -498,10 +519,11 @@ class Client extends GuzzleClient
      *
      * @param int|array $leads  Either a single lead ID or an array of lead IDs
      * @param array     $args
+     * @param bool      $returnRaw
      *
      * @link http://developers.marketo.com/documentation/rest/delete-lead/
      *
-     * @return DeleteLeadResponse
+     * @return \CSD\Marketo\Response\DeleteLeadResponse
      */
     public function deleteLead($leads, $args = array(), $returnRaw = false)
     {
@@ -517,10 +539,11 @@ class Client extends GuzzleClient
      * @param int|array $leads  Either a single lead ID or an array of lead IDs
      * @param array     $tokens Key value array of tokens to send new values for.
      * @param array     $args
+     * @param bool      $returnRaw
      *
      * @link http://developers.marketo.com/documentation/rest/request-campaign/
      *
-     * @return RequestCampaignResponse
+     * @return \CSD\Marketo\Response\RequestCampaignResponse
      */
     public function requestCampaign($id, $leads, $tokens = array(), $args = array(), $returnRaw = false)
     {
@@ -541,13 +564,14 @@ class Client extends GuzzleClient
      * Schedule a campaign
      *
      * @param int         $id      Campaign ID
-     * @param DateTime    $runAt   The time to run the campaign. If not provided, campaign will be run in 5 minutes.
+     * @param \DateTime   $runAt   The time to run the campaign. If not provided, campaign will be run in 5 minutes.
      * @param array       $tokens  Key value array of tokens to send new values for.
      * @param array       $args
+     * @param bool        $returnRaw
      *
      * @link http://developers.marketo.com/documentation/rest/schedule-campaign/
      *
-     * @return ScheduleCampaignResponse
+     * @return \CSD\Marketo\Response\ScheduleCampaignResponse
      */
     public function scheduleCampaign($id, \DateTime $runAt = NULL, $tokens = array(), $args = array(), $returnRaw = false)
     {
@@ -570,6 +594,7 @@ class Client extends GuzzleClient
      * @param int       $id
      * @param string    $cookie
      * @param array     $args
+     * @param bool      $returnRaw
      *
      * @link http://developers.marketo.com/documentation/rest/associate-lead/
      *
@@ -633,8 +658,8 @@ class Client extends GuzzleClient
      * Update an editable section in an email
      *
      * @param int       $emailId
-     * @param string    $htmlId
      * @param array     $args
+     * @param bool      $returnRaw
      *
      * @link http://developers.marketo.com/documentation/asset-api/update-email-content-by-id/
      *
@@ -653,10 +678,11 @@ class Client extends GuzzleClient
      * @param int       $emailId
      * @param string    $htmlId
      * @param array     $args
+     * @param bool      $returnRaw
      *
      * @link http://developers.marketo.com/documentation/asset-api/update-email-content-in-editable-section/
      *
-     * @return UpdateEmailContentInEditableSectionResponse
+     * @return \CSD\Marketo\Response\UpdateEmailContentInEditableSectionResponse
      */
     public function updateEmailContentInEditableSection($emailId, $htmlId, $args = array(), $returnRaw = false)
     {
@@ -670,12 +696,12 @@ class Client extends GuzzleClient
      * Approve an email
      *
      * @param int       $emailId
-     * @param string    $htmlId
      * @param array     $args
+     * @param bool      $returnRaw
      *
      * @link http://developers.marketo.com/documentation/asset-api/approve-email-by-id/
      *
-     * @return approveEmail
+     * @return \CSD\Marketo\Response\ApproveEmailResponse
      */
     public function approveEmail($emailId, $args = array(), $returnRaw = false)
     {
@@ -690,6 +716,7 @@ class Client extends GuzzleClient
      * @param string $command
      * @param array  $args
      * @param bool   $fixArgs
+     * @param bool   $returnRaw
      *
      * @return Response
      */
