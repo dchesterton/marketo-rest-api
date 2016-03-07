@@ -85,6 +85,20 @@ class Client extends GuzzleClient
     }
 
     /**
+     * This API will return all fields and the data type of a lead object.
+     * Note: This API returns API field names for both Marketo REST and SOAP APIs.
+     * 
+     * @param array $args - No required parameters
+     * 
+     * @link http://developers.marketo.com/documentation/rest/describe/
+     * 
+     * @return array
+     */
+    public function describeLead($args = array()) {
+        return $this->getResult('describeLead', $args);
+    }
+
+    /**
      * Import Leads via file upload
      *
      * @param array $args - Must contain 'format' and 'file' keys
