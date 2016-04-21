@@ -78,6 +78,15 @@ class Response implements ResponseClassInterface
     }
 
     /**
+     * Returns Errors from marketo as array.
+     *
+     * @return array|null
+     */
+    public function getErrors() {
+        return (isset($this->data['errors']) && count($this->data['errors'])) ? $this->data['errors'] : null;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public static function fromCommand(OperationCommand $command)
