@@ -6,7 +6,7 @@
         "describeLead": {
             "httpMethod": "GET",
             "uri": "leads/describe.json" 
-		},
+        },
         "importLeadsCsv": {
             "httpMethod": "POST",
             "uri": "leads.json",
