@@ -3,6 +3,10 @@
     "apiVersion": "1",
     "description": "Service description used for talking to the Marketo.com REST API.",
     "operations": {
+        "describeLead": {
+            "httpMethod": "GET",
+            "uri": "leads/describe.json" 
+        },
         "importLeadsCsv": {
             "httpMethod": "POST",
             "uri": "leads.json",
