@@ -306,6 +306,14 @@ class Client extends GuzzleClient implements ClientInterface
     /**
      * {@inheritdoc}
      */
+    public function getFields($args = array(), $returnRaw = false)
+    {
+        return $this->getResult('getFields', $args, $returnRaw);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addLeadsToList($listId, $leads, $args = array(), $returnRaw = false)
     {
         $args['listId'] = $listId;

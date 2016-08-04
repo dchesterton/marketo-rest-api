@@ -116,6 +116,12 @@
             },
             "responseClass": "CSD\\Marketo\\Response\\GetCampaignsResponse"
         },
+        "getFields": {
+            "httpMethod": "GET",
+            "uri": "leads/describe.json",
+            "parameters": {},
+            "responseClass": "CSD\\Marketo\\Response\\GetFieldsResponse"
+        },
         "getCampaign": {
             "httpMethod": "GET",
             "uri": "campaigns/{id}.json",
@@ -205,7 +211,6 @@
             "parameters": {
                 "nextPageToken": {"location": "query"},
                 "batchSize": {"location": "query"},
-                "nextPageToken": {"location": "query"},
                 "listId": {"location": "query"},
                 "fields": {"location": "query"}
             },

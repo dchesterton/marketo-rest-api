@@ -261,6 +261,18 @@ interface ClientInterface
     public function getCampaigns($ids = null, $args = array(), $returnRaw = false);
 
     /**
+     * Get fields (describr).
+     *
+     * @param array     $args
+     * @param bool      $returnRaw
+     *
+     * @link http://developers.marketo.com/documentation/rest/describe/
+     *
+     * @return \CSD\Marketo\Response\GetCampaignsResponse
+     */
+    public function getFields($args = array(), $returnRaw = false);
+
+    /**
      * Add one or more leads to the specified list.
      *
      * @param int       $listId List ID

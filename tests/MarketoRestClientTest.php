@@ -82,4 +82,13 @@ class MarketoSoapClientTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(serialize($response->getResult()), serialize($response->getCampaigns()));
         // @todo: figure out how to rest \CSD\Marketo\Response::fromCommand().
     }
+
+    public function testGetFields() {
+        $client = $this->_getClient();
+        $response = $client->getFields();
+
+        $this->assertTrue($response->isSuccess());
+        $this->assertNull($response->getError());
+        $this->assertNotEmpty($response->getFields());
+    }
 }
