@@ -1,0 +1,21 @@
+language: php
+sudo: false
+
+env:
+  global:
+    - marketo_client_id='Marketo client ID'
+    - marketo_client_secret='Marketo client secret'
+    - marketo_munchkin_id='100-AEK-913'
+
+php:
+  - 5.6
+  - 7.0
+  - hhvm
+
+install:
+  # Install Composer.
+  - composer install
+
+script:
+  # Run PHPUnit tests.
+  - ./vendor/bin/phpunit -c ./phpunit.xml --coverage-text
