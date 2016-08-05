@@ -36,7 +36,7 @@ class MarketoSoapClientTest extends \PHPUnit_Framework_TestCase {
         $this->assertNotEmpty($config['client_id'], 'The `marketo_client_id` environment variable is empty.');
         $this->assertNotEmpty($config['client_secret'], 'The `marketo_client_secret` environment variable is empty.');
         $this->assertNotEmpty($config['munchkin_id'], 'The `marketo_munchkin_id` environment variable is empty.');
-
+        
         $this->assertTrue($client instanceof \CSD\Marketo\Client);
     }
 
