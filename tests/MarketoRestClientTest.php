@@ -11,6 +11,11 @@ class MarketoSoapClientTest extends \PHPUnit_Framework_TestCase {
         parent::setUp();
     }
 
+    /**
+     * Gets the marketo rest client.
+     *
+     * @return \CSD\Marketo\ClientInterface
+     */
     private function _getClient() {
 
         static $client = FALSE;
@@ -36,7 +41,7 @@ class MarketoSoapClientTest extends \PHPUnit_Framework_TestCase {
         $this->assertNotEmpty($config['client_id'], 'The `marketo_client_id` environment variable is empty.');
         $this->assertNotEmpty($config['client_secret'], 'The `marketo_client_secret` environment variable is empty.');
         $this->assertNotEmpty($config['munchkin_id'], 'The `marketo_munchkin_id` environment variable is empty.');
-        
+
         $this->assertTrue($client instanceof \CSD\Marketo\Client);
     }
 
@@ -90,5 +95,14 @@ class MarketoSoapClientTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue($response->isSuccess());
         $this->assertNull($response->getError());
         $this->assertNotEmpty($response->getFields());
+    }
+
+    public function testGetActivityTypes() {
+        $client = $this->_getClient();
+        $response = $client->getActivityTypes();
+
+        $this->assertTrue($response->isSuccess());
+        $this->assertNull($response->getError());
+        $this->assertNotEmpty($response->getActivityTypes());
     }
 }

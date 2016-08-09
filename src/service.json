@@ -216,6 +216,12 @@
             },
             "responseClass": "CSD\\Marketo\\Response\\GetLeadChanges"
         },
+        "getActivityTypes": {
+            "httpMethod": "GET",
+            "uri": "activities/types.json",
+            "parameters": {},
+            "responseClass": "CSD\\Marketo\\Response\\GetActivityTypesResponse"
+        },
         "getLeadPartitions": {
             "httpMethod": "GET",
             "uri": "leads/partitions.json",
