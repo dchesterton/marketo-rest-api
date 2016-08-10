@@ -222,6 +222,18 @@
             "parameters": {},
             "responseClass": "CSD\\Marketo\\Response\\GetActivityTypesResponse"
         },
+        "getLeadActivity": {
+            "httpMethod": "GET",
+            "uri": "activities.json",
+            "parameters": {
+                "activityTypeIds": {"location": "query"},
+                "nextPageToken": {"location": "query"},
+                "batchSize": {"location": "query"},
+                "listId": {"location": "query"},
+                "leadIds": {"location": "query"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\GetLeadActivityResponse"
+        },
         "getLeadPartitions": {
             "httpMethod": "GET",
             "uri": "leads/partitions.json",

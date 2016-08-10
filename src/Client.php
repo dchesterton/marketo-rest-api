@@ -429,6 +429,17 @@ class Client extends GuzzleClient implements ClientInterface
     /**
      * {@inheritdoc}
      */
+    public function getLeadActivity($nextPageToken, $leads, $activityTypeIds, $args = array(), $returnRaw = false) {
+        $args['nextPageToken'] = $nextPageToken;
+        $args['leadIds'] = count((array) $leads) ? implode(',', (array)$leads) : '';
+        $args['activityTypeIds'] = count((array) $activityTypeIds) ? implode(',', (array)$activityTypeIds) : '';
+
+        return $this->getResult('getLeadActivity', $args, true, $returnRaw);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function updateEmailContent($emailId, $args = array(), $returnRaw = false)
     {
         $args['id'] = $emailId;
