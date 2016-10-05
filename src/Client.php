@@ -128,6 +128,7 @@ class Client extends GuzzleClient implements ClientInterface
      * @param array  $leads
      * @param string $lookupField
      * @param array  $args
+     * @param bool   $returnRaw
      *
      * @see Client::createLeads()
      * @see Client::createOrUpdateLeads()

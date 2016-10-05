@@ -250,7 +250,7 @@
                 "fromName": {"location": "query"},
                 "replyTo": {"location": "query"}
             },
-            "responseClass": "CSD\\Marketo\\Response\\UpdateEmailContentReponse"
+            "responseClass": "CSD\\Marketo\\Response\\UpdateEmailContentResponse"
         },
         "updateEmailContentInEditableSection": {
             "httpMethod": "POST",

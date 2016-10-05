@@ -28,9 +28,9 @@ interface ClientInterface
      *
      * @link http://developers.marketo.com/documentation/rest/import-lead/
      *
-     * @return array
-     *
      * @throws \Exception
+     *
+     * @return array
      */
     public function importLeadsCsv($args);
 
@@ -40,6 +40,8 @@ interface ClientInterface
      * @param int $batchId
      *
      * @link http://developers.marketo.com/documentation/rest/get-import-lead-status/
+     *
+     * @throws \Exception
      *
      * @return array
      */
@@ -52,6 +54,8 @@ interface ClientInterface
      *
      * @link http://developers.marketo.com/documentation/rest/get-import-failure-file/
      *
+     * @throws \Exception
+     *
      * @return \Guzzle\Http\Message\Response
      */
     public function getBulkUploadFailures($batchId);
@@ -62,6 +66,8 @@ interface ClientInterface
      * @param int $batchId
      *
      * @link http://developers.marketo.com/documentation/rest/get-import-warning-file/
+     *
+     * @throws \Exception
      *
      * @return \Guzzle\Http\Message\Response
      */
