@@ -41,6 +41,17 @@ use CSD\Marketo\Response\IsMemberOfListResponse;
 class Client extends GuzzleClient
 {
     /**
+     * @var array
+     */
+    private $marketoObjects = array(
+      'Leads' => 'leads',
+      'Companies' => 'companies',
+      'Opportunities' => 'opportunities',
+      'Opportunities Roles' => 'opportunities/roles',
+      'Sales Persons' => 'salespersons'
+    );
+
+    /**
      * {@inheritdoc}
      */
     public static function factory($config = array())
@@ -682,6 +693,93 @@ class Client extends GuzzleClient
         $args['id'] = $emailId;
 
         return $this->getResult('approveEmailbyId', $args, false, $returnRaw);
+    }
+
+    /**
+     * Describe the leads object
+     *
+     * @param bool|false  $returnRaw
+     * @throws \Exception
+     *
+     * @link http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Leads/describeUsingGET_2
+     *
+     * @return Response
+     */
+    public function describeLeads($returnRaw = false) {
+        return $this->describeObject('Leads', $returnRaw);
+    }
+
+    /**
+     * Describe the opportunities object
+     *
+     * @param bool|false  $returnRaw
+     * @throws \Exception
+     *
+     * @link http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Opportunities/describeUsingGET_3
+     *
+     * @return Response
+     */
+    public function describeOpportunities($returnRaw = false) {
+        return $this->describeObject('Opportunities', $returnRaw);
+    }
+
+    /**
+     * Describe the opportunities roles object
+     *
+     * @param bool|false  $returnRaw
+     * @throws \Exception
+     *
+     * @link http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Opportunities/describeOpportunityRoleUsingGET
+     *
+     * @return Response
+     */
+    public function describeOpportunityRoles($returnRaw = false) {
+        return $this->describeObject('Opportunities Roles', $returnRaw);
+    }
+
+    /**
+     * Describe the companies object
+     *
+     * @param bool|false $returnRaw
+     * @throws \Exception
+     *
+     * @link http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Companies/describeUsingGET
+     *
+     * @return Response
+     */
+    public function describeCompanies($returnRaw = false) {
+        return $this->describeObject('Companies', $returnRaw);
+    }
+
+    /**
+     * Describe the Sales Persons object
+     *
+     * @param bool|false $returnRaw
+     * @throws \Exception
+     *
+     * @link http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Sales_Persons/describeUsingGET_4
+     *
+     * @return Response
+     */
+    public function describeSalesPersons($returnRaw = false) {
+        return $this->describeObject('Sales Persons', $returnRaw);
+    }
+
+    /**
+     * Generic method to describe a Marketo object
+     *
+     * @param string      $objectName
+     * @param bool|false  $returnRaw
+     * @return Response
+     * @throws \Exception
+     */
+    private function describeObject($objectName, $returnRaw = false) {
+        if (!isset($this->marketoObjects[$objectName])) {
+            throw new \Exception('Expected parameter $objectName, to be a valid Marketo object '  . "but $objectName provided");
+        };
+
+        $args['objectName'] = $this->marketoObjects[$objectName];
+        return $this->getResult('describeObject', $args, false, $returnRaw);
     }
 
     /**
