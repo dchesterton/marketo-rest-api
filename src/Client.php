@@ -203,6 +203,31 @@ class Client extends GuzzleClient
         return $this->getResult('createOrUpdateLeads', $args, false, $returnRaw);
     }
 
+    public function updateCompanies($companies, $lookupBy = 'dedupeFields', $args = array()) {
+        return $this->createOrUpdateObjects('Companies', 'updateOnly', $companies, $lookupBy, $args, 'dedupeBy');
+    }
+
+    public function createCompanies($companies, $lookupBy = 'dedupeFields', $args = array()) {
+        return $this->createOrUpdateObjects('Companies', 'createOnly', $companies, $lookupBy, $args, 'dedupeBy');
+    }
+
+    public function createOrUpdateCompanies($companies, $lookupBy = 'dedupeFields', $args = array()) {
+        return $this->createOrUpdateObjects('Companies', 'createOrUpdate', $companies, $lookupBy, $args, 'dedupeBy');
+    }
+
+    private function createOrUpdateObjects($objectName, $action, $records, $lookupBy, $args = array(), $lookupFieldName = 'lookupField', $returnRaw = false) {
+        if (!isset($this->marketoObjects[$objectName])) {
+            throw new \Exception('createOrUpdate() Expected parameter $objectName, to be a valid Marketo object '  . "but $objectName provided");
+        };
+
+        $args['objectName'] = $objectName;
+        $args['action'] = $action;
+        $args['input'] = $records;
+        $args[$lookupFieldName] = $lookupBy;
+
+        return $this->getResult('createOrUpdateObject', $args, false, $returnRaw);
+    }
+
     /**
      * Create the given leads.
      *
@@ -775,7 +800,7 @@ class Client extends GuzzleClient
      */
     private function describeObject($objectName, $returnRaw = false) {
         if (!isset($this->marketoObjects[$objectName])) {
-            throw new \Exception('Expected parameter $objectName, to be a valid Marketo object '  . "but $objectName provided");
+            throw new \Exception('describeObject() Expected parameter $objectName, to be a valid Marketo object '  . "but $objectName provided");
         };
 
         $args['objectName'] = $this->marketoObjects[$objectName];
