@@ -204,6 +204,57 @@ class Client extends GuzzleClient
     }
 
     /**
+     * Only update the given opportunity roles.
+     *
+     * @param array       $opportunitiesRoles Array of arrays.
+     * @param string      $dedupeBy
+     * @param array       $args
+     * @param bool|false  $returnRaw
+     * @throws \Exception
+     *
+     * @link http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Opportunities/syncOpportunityRolesUsingPOST
+     *
+     * @return GetLeadsResponse
+     */
+    public function updateOpportunitiesRoles($opportunitiesRoles, $dedupeBy = 'dedupeFields', $args = array(), $returnRaw = false) {
+        return $this->createOrUpdateObjects('Opportunities Roles', 'updateOnly', $opportunitiesRoles, $dedupeBy, $args, $returnRaw);
+    }
+
+    /**
+     * Only create the given opportunity roles.
+     *
+     * @param array       $opportunitiesRoles Array of arrays.
+     * @param string      $dedupeBy
+     * @param array       $args
+     * @param bool|false  $returnRaw
+     * @throws \Exception
+     *
+     * @link http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Opportunities/syncOpportunityRolesUsingPOST
+     *
+     * @return GetLeadsResponse
+     */
+    public function createOpportunitiesRoles($opportunitiesRoles, $dedupeBy = 'dedupeFields', $args = array(), $returnRaw = false) {
+        return $this->createOrUpdateObjects('Opportunities Roles', 'createOnly', $opportunitiesRoles, $dedupeBy, $args, $returnRaw);
+    }
+
+    /**
+     * Create or update the given opportunity roles.
+     *
+     * @param array        $opportunitiesRoles Array of arrays.
+     * @param string       $dedupeBy
+     * @param array        $args
+     * @param bool|false   $returnRaw
+     * @throws \Exception
+     *
+     * @link http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Opportunities/syncOpportunityRolesUsingPOST
+     *
+     * @return GetLeadsResponse
+     */
+    public function createOrUpdateOpportunitiesRoles($opportunitiesRoles, $dedupeBy = 'dedupeFields', $args = array(), $returnRaw = false) {
+        return $this->createOrUpdateObjects('Opportunities Roles', 'createOrUpdate', $opportunitiesRoles, $dedupeBy, $args, $returnRaw);
+    }
+
+    /**
      * Only update the given opportunities.
      *
      * @param array       $opportunities Array of arrays.
