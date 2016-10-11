@@ -204,6 +204,84 @@ class Client extends GuzzleClient
     }
 
     /**
+     * Only update the given companies.
+     *
+     * @param array       $companies Array of arrays.
+     * @param string      $dedupeBy
+     * @param array       $args
+     * @param bool|false  $returnRaw
+     * @throws \Exception
+     *
+     * @link http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Companies/syncCompaniesUsingPOST
+     *
+     * @return GetLeadsResponse
+     */
+    public function updateCompanies($companies, $dedupeBy = 'dedupeFields', $args = array(), $returnRaw = false) {
+        return $this->createOrUpdateObjects('Companies', 'updateOnly', $companies, $dedupeBy, $args, $returnRaw);
+    }
+
+    /**
+     * Only create the given companies.
+     *
+     * @param array       $companies Array of arrays.
+     * @param string      $dedupeBy
+     * @param array       $args
+     * @param bool|false  $returnRaw
+     * @throws \Exception
+     *
+     * @link http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Companies/syncCompaniesUsingPOST
+     *
+     * @return GetLeadsResponse
+     */
+    public function createCompanies($companies, $dedupeBy = 'dedupeFields', $args = array(), $returnRaw = false) {
+        return $this->createOrUpdateObjects('Companies', 'createOnly', $companies, $dedupeBy, $args, $returnRaw);
+    }
+
+    /**
+     * Create or update the given companies.
+     *
+     * @param array        $companies Array of arrays.
+     * @param string       $dedupeBy
+     * @param array        $args
+     * @param bool|false   $returnRaw
+     * @throws \Exception
+     *
+     * @link http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Companies/syncCompaniesUsingPOST
+     *
+     * @return GetLeadsResponse
+     */
+    public function createOrUpdateCompanies($companies, $dedupeBy = 'dedupeFields', $args = array(), $returnRaw = false) {
+        return $this->createOrUpdateObjects('Companies', 'createOrUpdate', $companies, $dedupeBy, $args, $returnRaw);
+    }
+
+    /**
+     * Generic method to create or update Marketo objects.
+     *
+     * @param string      $objectName
+     * @param string      $action     Should be createOnly, updateOnly, or createOrUpdate.
+     * @param array       $records    Array of arrays.
+     * @param string      $dedupeBy
+     * @param array       $args
+     * @param bool|false  $returnRaw
+     * @throws \Exception
+     *
+     * @return GetLeadsResponse
+
+     */
+    private function createOrUpdateObjects($objectName, $action, $records, $dedupeBy, $args = array(), $returnRaw = false) {
+        if (!isset($this->marketoObjects[$objectName])) {
+            throw new \Exception('createOrUpdate() Expected parameter $objectName, to be a valid Marketo object '  . "but $objectName provided");
+        };
+
+        $args['objectName'] = $this->marketoObjects[$objectName];
+        $args['action'] = $action;
+        $args['input'] = $records;
+        $args['dedupeBy'] = $dedupeBy;
+
+        return $this->getResult('createOrUpdateObject', $args, false, $returnRaw);
+    }
+
+    /**
      * Create the given leads.
      *
      * @param array  $leads
@@ -724,7 +802,7 @@ class Client extends GuzzleClient
     }
 
     /**
-     * Describe the opportunities roles object
+     * Describe the opportunities roles object.
      *
      * @param bool|false  $returnRaw
      * @throws \Exception
@@ -738,7 +816,7 @@ class Client extends GuzzleClient
     }
 
     /**
-     * Describe the companies object
+     * Describe the companies object.
      *
      * @param bool|false $returnRaw
      * @throws \Exception
@@ -752,7 +830,7 @@ class Client extends GuzzleClient
     }
 
     /**
-     * Describe the Sales Persons object
+     * Describe the Sales Persons object.
      *
      * @param bool|false $returnRaw
      * @throws \Exception
@@ -766,7 +844,7 @@ class Client extends GuzzleClient
     }
 
     /**
-     * Generic method to describe a Marketo object
+     * Generic method to describe a Marketo object.
      *
      * @param string      $objectName
      * @param bool|false  $returnRaw
@@ -775,7 +853,7 @@ class Client extends GuzzleClient
      */
     private function describeObject($objectName, $returnRaw = false) {
         if (!isset($this->marketoObjects[$objectName])) {
-            throw new \Exception('Expected parameter $objectName, to be a valid Marketo object '  . "but $objectName provided");
+            throw new \Exception('describeObject() Expected parameter $objectName, to be a valid Marketo object '  . "but $objectName provided");
         };
 
         $args['objectName'] = $this->marketoObjects[$objectName];
