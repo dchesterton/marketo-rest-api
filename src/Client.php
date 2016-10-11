@@ -204,6 +204,57 @@ class Client extends GuzzleClient
     }
 
     /**
+     * Only update the given opportunities.
+     *
+     * @param array       $opportunities Array of arrays.
+     * @param string      $dedupeBy
+     * @param array       $args
+     * @param bool|false  $returnRaw
+     * @throws \Exception
+     *
+     * @link http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Opportunities/syncOpportunitiesUsingPOST
+     *
+     * @return GetLeadsResponse
+     */
+    public function updateOpportunities($opportunities, $dedupeBy = 'dedupeFields', $args = array(), $returnRaw = false) {
+        return $this->createOrUpdateObjects('Opportunities', 'updateOnly', $opportunities, $dedupeBy, $args, $returnRaw);
+    }
+
+    /**
+     * Only create the given opportunities.
+     *
+     * @param array       $opportunities Array of arrays.
+     * @param string      $dedupeBy
+     * @param array       $args
+     * @param bool|false  $returnRaw
+     * @throws \Exception
+     *
+     * @link http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Opportunities/syncOpportunitiesUsingPOST
+     *
+     * @return GetLeadsResponse
+     */
+    public function createOpportunities($opportunities, $dedupeBy = 'dedupeFields', $args = array(), $returnRaw = false) {
+        return $this->createOrUpdateObjects('Opportunities', 'createOnly', $opportunities, $dedupeBy, $args, $returnRaw);
+    }
+
+    /**
+     * Create or update the given opportunities.
+     *
+     * @param array        $opportunities Array of arrays.
+     * @param string       $dedupeBy
+     * @param array        $args
+     * @param bool|false   $returnRaw
+     * @throws \Exception
+     *
+     * @link http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Opportunities/syncOpportunitiesUsingPOST
+     *
+     * @return GetLeadsResponse
+     */
+    public function createOrUpdateOpportunities($opportunities, $dedupeBy = 'dedupeFields', $args = array(), $returnRaw = false) {
+        return $this->createOrUpdateObjects('Opportunities', 'createOrUpdate', $opportunities, $dedupeBy, $args, $returnRaw);
+    }
+
+    /**
      * Only update the given companies.
      *
      * @param array       $companies Array of arrays.
