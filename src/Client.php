@@ -203,27 +203,27 @@ class Client extends GuzzleClient
         return $this->getResult('createOrUpdateLeads', $args, false, $returnRaw);
     }
 
-    public function updateCompanies($companies, $lookupBy = 'dedupeFields', $args = array()) {
-        return $this->createOrUpdateObjects('Companies', 'updateOnly', $companies, $lookupBy, $args, 'dedupeBy');
+    public function updateCompanies($companies, $dedupeBy = 'dedupeFields', $args = array(), $returnRaw = false) {
+        return $this->createOrUpdateObjects('Companies', 'updateOnly', $companies, $dedupeBy, $args, $returnRaw);
     }
 
-    public function createCompanies($companies, $lookupBy = 'dedupeFields', $args = array()) {
-        return $this->createOrUpdateObjects('Companies', 'createOnly', $companies, $lookupBy, $args, 'dedupeBy');
+    public function createCompanies($companies, $dedupeBy = 'dedupeFields', $args = array(), $returnRaw = false) {
+        return $this->createOrUpdateObjects('Companies', 'createOnly', $companies, $dedupeBy, $args, $returnRaw);
     }
 
-    public function createOrUpdateCompanies($companies, $lookupBy = 'dedupeFields', $args = array()) {
-        return $this->createOrUpdateObjects('Companies', 'createOrUpdate', $companies, $lookupBy, $args, 'dedupeBy');
+    public function createOrUpdateCompanies($companies, $dedupeBy = 'dedupeFields', $args = array(), $returnRaw = false) {
+        return $this->createOrUpdateObjects('Companies', 'createOrUpdate', $companies, $dedupeBy, $args, $returnRaw);
     }
 
-    private function createOrUpdateObjects($objectName, $action, $records, $lookupBy, $args = array(), $lookupFieldName = 'lookupField', $returnRaw = false) {
+    private function createOrUpdateObjects($objectName, $action, $records, $dedupeBy, $args = array(), $returnRaw = false) {
         if (!isset($this->marketoObjects[$objectName])) {
             throw new \Exception('createOrUpdate() Expected parameter $objectName, to be a valid Marketo object '  . "but $objectName provided");
         };
 
-        $args['objectName'] = $objectName;
+        $args['objectName'] = $this->marketoObjects[$objectName];
         $args['action'] = $action;
         $args['input'] = $records;
-        $args[$lookupFieldName] = $lookupBy;
+        $args['dedupeBy'] = $dedupeBy;
 
         return $this->getResult('createOrUpdateObject', $args, false, $returnRaw);
     }
