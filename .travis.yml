@@ -18,4 +18,4 @@ install:
 
 script:
   # Run PHPUnit tests.
-  - ./vendor/bin/phpunit -c ./phpunit.xml --coverage-text
+  - ./vendor/bin/phpunit -c ./phpunit.xml.dist --coverage-text

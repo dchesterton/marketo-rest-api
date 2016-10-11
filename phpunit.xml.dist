@@ -14,7 +14,17 @@
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>
-
+    <groups>
+        <include>
+            <group>marketo-rest-api</group>
+        </include>
+    </groups>
+    <php>
+        <!-- Specify your Marketo credentials for API integration testing -->
+        <server name="MARKETO_MUNCHKIN_ID" value="" />
+        <server name="MARKETO_CLIENT_ID" value="" />
+        <server name="MARKETO_CLIENT_SECRET" value="" />
+    </php>
     <filter>
         <whitelist>
             <directory suffix=".php">./src/</directory>

@@ -17,7 +17,7 @@ namespace CSD\Marketo;
  *
  * @author Daniel Chesterton <daniel@chestertondevelopment.com>
  */
-interface ClientInterface
+interface ClientInterface extends \Guzzle\Service\ClientInterface
 {
 
     /**
