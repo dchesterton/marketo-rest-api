@@ -247,6 +247,25 @@
                 "id": {"location": "uri"}
                 },
             "responseClass": "CSD\\Marketo\\Response\\ApproveEmailResponse"
+        },
+        "describeObject": {
+            "httpMethod": "GET",
+            "uri": "/rest/v1/{objectName}/describe.json",
+            "parameters": {
+                "objectName": {"location": "uri"}
+            },
+            "responseClass": "CSD\\Marketo\\Response"
+        },
+        "createOrUpdateObject": {
+            "httpMethod": "POST",
+            "uri": "/rest/v1/{objectName}.json",
+            "parameters": {
+                "objectName": {"location": "uri"},
+                "action": {"location": "json"},
+                "input": {"location": "json"},
+                "dedupeBy": {"location": "json"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\GetLeadsResponse"
         }
     }
 }
