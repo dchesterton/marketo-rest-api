@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         stopOnFailure="false"
+         bootstrap="vendor/autoload.php"
+>
+    <testsuites>
+        <testsuite name="Test suite for Marketo REST API.">
+            <directory>./tests/</directory>
+        </testsuite>
+    </testsuites>
+    <groups>
+        <include>
+            <group>marketo-rest-api</group>
+        </include>
+    </groups>
+    <php>
+        <!-- Specify your Marketo credentials for API integration testing -->
+        <server name="MARKETO_MUNCHKIN_ID" value="" />
+        <server name="MARKETO_CLIENT_ID" value="" />
+        <server name="MARKETO_CLIENT_SECRET" value="" />
+    </php>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src/</directory>
+        </whitelist>
+    </filter>
+</phpunit>

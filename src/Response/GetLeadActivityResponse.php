@@ -13,16 +13,16 @@ namespace CSD\Marketo\Response;
 use CSD\Marketo\Response as Response;
 
 /**
- * Response for the getLead and getLeadByFilterType API method.
+ * Response for the getLead and getLeadActivity API method.
  *
  * @author Roberto Espinoza <roberto.espinoza@tamago-db.com>
  */
-class GetLeadChanges extends Response
+class GetLeadActivityResponse extends Response
 {
     /**
      * @return array|null contains an array of leads with changes and attributes
      */
-    public function getLeadChanges()
+    public function getLeadActivity()
     {
         if ($this->isSuccess()) {
             $result = $this->getResult();

@@ -116,6 +116,12 @@
             },
             "responseClass": "CSD\\Marketo\\Response\\GetCampaignsResponse"
         },
+        "getFields": {
+            "httpMethod": "GET",
+            "uri": "leads/describe.json",
+            "parameters": {},
+            "responseClass": "CSD\\Marketo\\Response\\GetFieldsResponse"
+        },
         "getCampaign": {
             "httpMethod": "GET",
             "uri": "campaigns/{id}.json",
@@ -205,11 +211,28 @@
             "parameters": {
                 "nextPageToken": {"location": "query"},
                 "batchSize": {"location": "query"},
-                "nextPageToken": {"location": "query"},
                 "listId": {"location": "query"},
                 "fields": {"location": "query"}
             },
             "responseClass": "CSD\\Marketo\\Response\\GetLeadChanges"
+        },
+        "getActivityTypes": {
+            "httpMethod": "GET",
+            "uri": "activities/types.json",
+            "parameters": {},
+            "responseClass": "CSD\\Marketo\\Response\\GetActivityTypesResponse"
+        },
+        "getLeadActivity": {
+            "httpMethod": "GET",
+            "uri": "activities.json",
+            "parameters": {
+                "activityTypeIds": {"location": "query"},
+                "nextPageToken": {"location": "query"},
+                "batchSize": {"location": "query"},
+                "listId": {"location": "query"},
+                "leadIds": {"location": "query"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\GetLeadActivityResponse"
         },
         "getLeadPartitions": {
             "httpMethod": "GET",
@@ -227,7 +250,7 @@
                 "fromName": {"location": "query"},
                 "replyTo": {"location": "query"}
             },
-            "responseClass": "CSD\\Marketo\\Response\\UpdateEmailContentReponse"
+            "responseClass": "CSD\\Marketo\\Response\\UpdateEmailContentResponse"
         },
         "updateEmailContentInEditableSection": {
             "httpMethod": "POST",
