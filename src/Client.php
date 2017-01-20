@@ -629,6 +629,13 @@ class Client extends GuzzleClient
         return $this->getResult('getLeadChanges', $args, true, $returnRaw);
     }
 
+    public function getLeadActivities($nextPageToken, $args = array(), $returnRaw = false)
+    {
+        $args['nextPageToken'] = $nextPageToken;
+
+        return $this->getResult('getLeadActivities', $args, true, $returnRaw);
+    }
+
     /**
      * Update an editable section in an email
      *
