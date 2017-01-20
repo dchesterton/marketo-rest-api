@@ -85,6 +85,20 @@
             },
             "responseClass": "CSD\\Marketo\\Response\\GetLeadsResponse"
         },
+        "getLeadActivities": {
+            "httpMethod": "GET",
+            "uri": "activities.json",
+            "parameters": {
+                "nextPageToken": {"location": "query"},
+                "batchSize": {"location": "query"},
+                "nextPageToken": {"location": "query"},
+                "listId": {"location": "query"},
+                "leadIds": {"location": "query"},
+                "activityTypeIds": {"location": "query"},
+                "assetIds": {"location": "query"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\GetLeadActivities"
+        },
         "isMemberOfList": {
             "httpMethod": "GET",
             "uri": "lists/{listId}/leads/ismember.json",
