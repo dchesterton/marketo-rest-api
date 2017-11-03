@@ -515,10 +515,13 @@ class Client extends GuzzleClient
      *
      * @param int       $id     Campaign ID
      * @param int|array $leads  Either a single lead ID or an array of lead IDs
-     * @param array     $tokens Key value array of tokens to send new values for.
+     * @param array     $tokens Numerically indexed array of tokens, each consisting of an associative array of "name" and "value" keys for every token.
      * @param array     $args
      *
      * @link http://developers.marketo.com/documentation/rest/request-campaign/
+     *
+     * Example post body:
+     * {"input":{"leads":[{"id":12345}],"tokens":[{"name":"{{my.EmailSubject}}","value":"Custom Email Subject via API"}]}}
      *
      * @return RequestCampaignResponse
      */
