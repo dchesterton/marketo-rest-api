@@ -205,7 +205,6 @@
             "parameters": {
                 "nextPageToken": {"location": "query"},
                 "batchSize": {"location": "query"},
-                "nextPageToken": {"location": "query"},
                 "listId": {"location": "query"},
                 "fields": {"location": "query"}
             },
@@ -247,6 +246,25 @@
                 "id": {"location": "uri"}
                 },
             "responseClass": "CSD\\Marketo\\Response\\ApproveEmailResponse"
+        },
+        "createOrUpdateActivities": {
+            "httpMethod": "POST",
+            "uri": "activities/external.json",
+            "parameters": {
+                "input": {"location": "json"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\CreateOrUpdateActivitiesResponse"
+        },
+        "createOrUpdateObjects": {
+            "httpMethod": "POST",
+            "uri": "customobjects/{objectName}.json",
+            "parameters": {
+                "objectName":{"location":"uri"},
+                "input": {"location": "json"},
+                "action": {"location": "json"},
+                "dedupeBy": {"location": "json"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\CreateOrUpdateObjectsResponse"
         }
     }
 }
