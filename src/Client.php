@@ -684,6 +684,197 @@ class Client extends GuzzleClient
         return $this->getResult('approveEmailbyId', $args, false, $returnRaw);
     }
 
+	/**
+	 * Calls the CreateOrUpdateActivities command with the given action.
+	 *
+	 * @param string $action
+	 * @param array  $activities
+	 * @param array  $args
+	 * @param bool   $returnRaw
+	 *
+	 * @see Client::createActivities()
+	 * @see Client::createOrUpdateActivities()
+	 * @see Client::updateActivities()
+	 * @see Client::createDuplicateActivities()
+	 *
+	 * @link http://developers.marketo.com/rest-api/lead-database/activities/#add_custom_activities
+	 *
+	 * @return CreateOrUpdateActivitiesResponse
+	 */
+	public function createOrUpdateActivitiesCommand($action, $activities, $args, $returnRaw = false)
+	{
+		$args['input']  = $activities;
+		$args['action'] = $action;
+
+		return $this->getResult('createOrUpdateActivities', $args, false, $returnRaw);
+	}
+
+	/**
+	 * Create the given activities.
+	 *
+	 * @param array  $activities
+	 * @param array  $args
+	 *
+	 * @see Client::createOrUpdateActivitiesCommand()
+	 *
+	 * @link http://developers.marketo.com/rest-api/lead-database/activities/#add_custom_activities
+	 *
+	 * @return CreateOrUpdateActivitiesResponse
+	 */
+	public function createActivities($activities, $args = array())
+	{
+		return $this->createOrUpdateActivitiesCommand('createOnly', $activities, $args);
+	}
+
+	/**
+	 * Update the given activities, or create them if they do not exist.
+	 *
+	 * @param array  $activities
+	 * @param array  $args
+	 *
+	 * @see Client::createOrUpdateActivitiesCommand()
+	 *
+	 * @link http://developers.marketo.com/rest-api/lead-database/activities/#add_custom_activities
+	 *
+	 * @return CreateOrUpdateActivitiesResponse
+	 */
+	public function createOrUpdateActivities($activities, $args = array())
+	{
+		return $this->createOrUpdateActivitiesCommand('createOrUpdate', $activities, $args);
+	}
+
+	/**
+	 * Update the given activities.
+	 *
+	 * @param array  $activities
+	 * @param array  $args
+	 *
+	 * @see Client::createOrUpdateActivitiesCommand()
+	 *
+	 * @link http://developers.marketo.com/rest-api/lead-database/activities/#add_custom_activities
+	 *
+	 * @return CreateOrUpdateActivitiesResponse
+	 */
+	public function updateActivities($activities, $args = array()) {
+		return $this->createOrUpdateActivitiesCommand('updateOnly', $activities, $args);
+	}
+
+	/**
+	 * Create duplicates of the given activities.
+	 *
+	 * @param array  $activities
+	 * @param array  $args
+	 *
+	 * @see Client::createOrUpdateActivitiesCommand()
+	 *
+	 * @link http://developers.marketo.com/rest-api/lead-database/activities/#add_custom_activities
+	 *
+	 * @return CreateOrUpdateActivitiesResponse
+	 */
+	protected function createDuplicateActivities($activities, $args = array()) {
+		return $this->createOrUpdateActivitiesCommand('createDuplicate', $activities, $args);
+	}
+
+	/**
+	 * Calls the CreateOrUpdateObjects command with the given action.
+	 *
+	 * @param string $action
+	 * @param array  $objects
+	 * @param string $dedupeBy
+	 * @param array  $args
+	 * @param bool   $returnRaw
+	 *
+	 * @see Client::createObjects()
+	 * @see Client::createOrUpdateObjects()
+	 * @see Client::updateObjects()
+	 * @see Client::createDuplicateObjects()
+	 *
+	 * @link http://developers.marketo.com/rest-api/lead-database/custom-objects/#create_and_update
+	 *
+	 * @return CreateOrUpdateObjectsResponse
+	 */
+	protected function createOrUpdateObjectsCommand($action, $objects, $dedupeBy, $args, $returnRaw = false)
+	{
+		$args['input'] = $objects;
+		$args['action'] = $action;
+
+		if (isset($dedupeBy)) {
+			$args['dedupeBy'] = $dedupeBy;
+		}
+
+		return $this->getResult('createOrUpdateObjects', $args, false, $returnRaw);
+	}
+
+	/**
+	 * Create the given objects.
+	 *
+	 * @param array  $objects
+	 * @param string $dedupeBy
+	 * @param array  $args
+	 *
+	 * @see Client::createOrUpdateObjectsCommand()
+	 *
+	 * @link http://developers.marketo.com/rest-api/lead-database/custom-objects/#create_and_update
+	 *
+	 * @return CreateOrUpdateObjectsResponse
+	 */
+	public function createObjects($objects, $dedupeBy = null, $args = array())
+	{
+		return $this->createOrUpdateObjectsCommand('createOnly', $objects, $dedupeBy, $args);
+	}
+
+	/**
+	 * Update the given objects, or create them if they do not exist.
+	 *
+	 * @param array  $objects
+	 * @param string $dedupeBy
+	 * @param array  $args
+	 *
+	 * @see Client::createOrUpdateObjectsCommand()
+	 *
+	 * @link http://developers.marketo.com/rest-api/lead-database/custom-objects/#create_and_update
+	 *
+	 * @return CreateOrUpdateObjectsResponse
+	 */
+	public function createOrUpdateObjects($objects, $dedupeBy = null, $args = array())
+	{
+		return $this->createOrUpdateObjectsCommand('createOrUpdate', $objects, $dedupeBy, $args);
+	}
+
+	/**
+	 * Update the given objects.
+	 *
+	 * @param array  $objects
+	 * @param string $dedupeBy
+	 * @param array  $args
+	 *
+	 * @see Client::createOrUpdateObjectsCommand()
+	 *
+	 * @link http://developers.marketo.com/rest-api/lead-database/custom-objects/#create_and_update
+	 *
+	 * @return CreateOrUpdateObjectsResponse
+	 */
+	protected function updateObjects($objects, $dedupeBy = null, $args = array()) {
+		return $this->createOrUpdateObjectsCommand('updateOnly', $objects, $dedupeBy, $args);
+	}
+
+	/**
+	 * Create duplicates of the given leads.
+	 *
+	 * @param array  $objects
+	 * @param string $dedupeBy
+	 * @param array  $args
+	 *
+	 * @see Client::createOrUpdateObjectsCommand()
+	 *
+	 * @link http://developers.marketo.com/rest-api/lead-database/custom-objects/#create_and_update
+	 *
+	 * @return CreateOrUpdateObjectsResponse
+	 */
+	protected function createDuplicateObjects($objects, $dedupeBy = null, $args = array()) {
+		return $this->createOrUpdateObjectsCommand('createDuplicate', $objects, $dedupeBy, $args);
+	}
+
     /**
      * Internal helper method to actually perform command.
      *
